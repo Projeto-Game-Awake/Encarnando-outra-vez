@@ -19,7 +19,7 @@ window.onload = function() {
         dom: {
             createContainer: true
         },
-        scene: [start,gameplay,question,choice,mini_game,all_in_one]
+        scene: [start,gameplay,question,choice,mini_game,all_in_one,death]
     }
     game = new Phaser.Game(gameConfig);
     window.focus();

@@ -2,6 +2,9 @@ class choice extends Phaser.Scene{
     constructor(){
         super("choice");
     }
+    init(data) {
+        this.player = data.player;
+    }
     create(){
         for(let i=0;i<3;i++) {
             for(let j=0;j<3;j++) {
@@ -15,7 +18,7 @@ class choice extends Phaser.Scene{
     }
     selectCard() {
         this.scene.resume("main");
-        this.scene.remove("choice");
+        this.scene.stop();
         scene.board.nextPlayer();
     }
 }

@@ -51,6 +51,12 @@ class gameplay extends Phaser.Scene{
         let timeLine = this.tweens.createTimeline();
         let player = this.board.getCurrentPlayer();
 
+        player.age += value;
+        if(player.age > player.death) {
+            value -= player.age - player.death;
+            player.age = player.death;
+        }
+
         if(player.pos == -1 && value > 0) {
             player.x = 0;
             timeLine.add({
@@ -79,9 +85,15 @@ class gameplay extends Phaser.Scene{
             callbackScope: this,
             callback: function() {
                 scene.scene.pause();
-                scene.scene.launch(scene.tileScene[scene.board.getTileType(player)], {
-                    player: player
-                });
+                if(player.death == player.age) {
+                    scene.scene.run("death", {
+                        player: player
+                    });
+                } else {
+                    scene.scene.run(scene.tileScene[scene.board.getTileType(player)], {
+                        player: player
+                    });
+                }
             }
         });
         timeLine.play();

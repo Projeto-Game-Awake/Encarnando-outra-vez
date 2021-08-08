@@ -2,6 +2,9 @@ class mini_game extends Phaser.Scene{
     constructor(){
         super("mini-game");
     }
+    init(data) {
+        this.player = data.player;
+    }
     create(){
         for(let i=0;i<3;i++) {
             for(let j=0;j<3;j++) {
@@ -15,7 +18,7 @@ class mini_game extends Phaser.Scene{
     }
     selectCard() {
         this.scene.resume("main");
-        this.scene.remove("mini-game");
+        this.scene.stop();
         scene.board.nextPlayer();
     }
 }

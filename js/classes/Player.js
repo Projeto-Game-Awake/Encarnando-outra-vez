@@ -6,6 +6,9 @@ class Player {
         let sprite = scene.add.sprite(gameOptions.tileSize*x,0,"animals",x%5);
         sprite.setOrigin(0,0);
         this.sprite = sprite;
+        this.death = Phaser.Math.Between(0,120);
+        this.age = Phaser.Math.Between(0,this.death);        
+        console.log(this.age);
     }
     doMove() {
         let direction = scene.board.path[++this.pos].direction;

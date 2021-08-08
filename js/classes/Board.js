@@ -89,8 +89,6 @@ class Board {
             type,
             direction
         })
-        console.log(type);
-        console.log(scene.tileScene[type]);
         let logo = scene.add.rectangle(x + 30,y + 30, 62, 62,this.colors[type]);
 
         container.add([logo]);
