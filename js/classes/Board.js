@@ -53,7 +53,7 @@ class Board {
         this.position = 0;
         this.x = 0;
         this.y = 0;
-        this.colors = [0xff0000,0x0000ff,0xffff00,0xffffff]
+        this.colors = [0x0000ff,0xffff00,0xff0000,0xffffff]
     }
     addLine(count,direction) {
         let current = this.direction[direction];
@@ -70,7 +70,7 @@ class Board {
         return Phaser.Math.Between(0,3);
     }
     getTileType(player) {
-        return this.path[player.pos].type;
+        return this.path[player.pos+1].type;
     }
     getCurrentPlayer() {
         return this.players[this.currentPlayerIndex];
@@ -89,6 +89,8 @@ class Board {
             type,
             direction
         })
+        console.log(type);
+        console.log(scene.tileScene[type]);
         let logo = scene.add.rectangle(x + 30,y + 30, 62, 62,this.colors[type]);
 
         container.add([logo]);
@@ -193,20 +195,23 @@ class Board {
     spin() {
         this.spinAngleStart = Math.random() * 10 + 10;
         this.spinTime = 0;
-        this.spinTimeTotal = Math.random() * 3 + 4 * 200;
+        this.spinTimeTotal = Math.random() * 3 + 4 * 1000;
         this.option = -2;
         this.optionDisplay.setText("");
         this.rotateWheel();
     }
     rotateWheel() {
-        this.spinTime += 30;
+        this.spinTime += 600;
         if(this.spinTime >= this.spinTimeTotal) {
             this.stopRotateWheel();
             return;
         }
-        let spinAngle = this.spinAngleStart - this.easeOut(this.spinTime, 0, this.spinAngleStart, this.spinTimeTotal);
+        let spinAngle = this.spinAngleStart;// - this.easeOut(this.spinTime, 0, this.spinAngleStart, this.spinTimeTotal);
         this.startAngle += (spinAngle * Math.PI / 180);
         this.drawRouletteWheel();
+        this.spinTimeout = setTimeout(function() {
+            scene.board.rotateWheel()
+        },30);
     }
     stopRotateWheel() {
         clearTimeout(this.spinTimeout);
@@ -220,6 +225,7 @@ class Board {
         this.option = this.options[index];
         this.optionDisplay.setText(this.option);
         scene.children.bringToTop(this.optionDisplay);
+        scene.doPlayerMove();
     }
     easeOut(t, b, c, d) {
         var ts = (t/=d)*t;

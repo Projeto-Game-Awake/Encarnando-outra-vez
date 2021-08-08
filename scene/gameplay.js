@@ -43,42 +43,48 @@ class gameplay extends Phaser.Scene{
         this.board.start();
     }
     update(time,delta) {
-        if(this.board.option > -1) {
-            let value = this.board.option;
-            this.board.option = -1;
-            let current = 0;
-            let timeLine = this.tweens.createTimeline();
-            let player = this.board.getCurrentPlayer();
+    }
+    doPlayerMove() {
+        let value = this.board.option;
+        this.board.option = -1;
+        let current = 0;
+        let timeLine = this.tweens.createTimeline();
+        let player = this.board.getCurrentPlayer();
 
-            if(player.pos == -1 && value > 0) {
-                value--;
-                player.x = 0;
-                timeLine.add({
-                    targets: player.sprite,
-                    x:player.x,
-                    y:gameOptions.tileSize,
-                    duration: 300,
-                    callbackScope: this,
-                    callback: this.getCallBackEndMove(0,value,player)
-                });
-            }
-            while(current < value) {
-                player.doMove();
-
-                current++;                
-                timeLine.add({
-                    targets: player.sprite,
-                    x:gameOptions.tileSize*player.x,
-                    y:gameOptions.tileSize*player.y,
-                    duration: 300,
-                    callbackScope: this,
-                    callback: this.getCallBackEndMove(current,value,player)
-                });
-            }
-            timeLine.play();
-        } else if(this.board.option == -2) {
-            this.board.rotateWheel();
+        if(player.pos == -1 && value > 0) {
+            player.x = 0;
+            timeLine.add({
+                targets: player.sprite,
+                x:player.x,
+                y:gameOptions.tileSize,
+                duration: 300
+            });
+            current++;
         }
+        while(current < value) {
+            player.doMove();
+   
+            timeLine.add({
+                targets: player.sprite,
+                x:gameOptions.tileSize*player.x,
+                y:gameOptions.tileSize*player.y,
+                duration: 300
+            });
+            
+            current++;             
+        }
+        timeLine.add({
+            targets: player.sprite,
+            duration: 300,
+            callbackScope: this,
+            callback: function() {
+                scene.scene.pause();
+                scene.scene.launch(scene.tileScene[scene.board.getTileType(player)], {
+                    player: player
+                });
+            }
+        });
+        timeLine.play();
     }
     drawField(){
         this.poolArray = [];
@@ -95,25 +101,6 @@ class gameplay extends Phaser.Scene{
 
         for(let i=0;i<gameOptions.players;i++) {
             scene.children.bringToTop(scene.board.players[i].sprite);
-        }
-    }
-    getCallBackEndMove(current,max,player) {
-        if(current == max) {
-            return function() {
-                scene.time.addEvent({
-                    delay: 500,
-                    loop: false,
-                    callback: () => {
-                        scene.scene.pause("gameplay");
-                        scene.scene.launch(scene.tileScene[scene.board.getTileType(player)], {
-                            player: player
-                        });
-                    }
-                });
-            } 
-        } else {
-            return function() {
-            }
         }
     }
 }
