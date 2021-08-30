@@ -11,9 +11,10 @@ class Player {
     );
     sprite.setOrigin(0, 0);
     this.sprite = sprite;
-    this.death = Phaser.Math.Between(0, 120);
-    this.age = Phaser.Math.Between(0, this.death);
-    console.log(this.age);
+    this.death = Phaser.Math.Between(20, 120);
+    this.age = Phaser.Math.Between(0, 20);
+    console.log("Idade", this.age);
+    console.log("Morte", this.death);
 
     eventManager.subscribe("player_walk", (data) => {
       console.log(`"anEvent", was published with this data: `);

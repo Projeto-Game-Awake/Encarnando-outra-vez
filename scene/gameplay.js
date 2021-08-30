@@ -19,6 +19,9 @@ class gameplay extends Phaser.Scene {
       frameWidth: 240,
       frameHeight: 338,
     });
+
+    this.load.bitmapFont("hud", "static/font/hud.png", "static/font/hud.fnt");
+
     this.objects = {};
   }
   create() {
@@ -40,7 +43,9 @@ class gameplay extends Phaser.Scene {
     let gameplay = this;
 
     eventManager.subscribe("wheel_finished", (data) => {
-      console.log(`"anEvent", was published with this data: `);
+      console.log(
+        `"anEvent", was published with this data: ${JSON.stringify(data)}`
+      );
       gameplay.doPlayerMove(data);
     });
   }
@@ -48,8 +53,6 @@ class gameplay extends Phaser.Scene {
   doPlayerMove(data) {
     console.log("---Entrou---", this.board);
     let value = data.distance;
-    // let value = 1;
-    // this.board.option = -1;
     let current = 0;
     let timeLine = this.tweens.createTimeline();
     let player = this.board.getCurrentPlayer();
