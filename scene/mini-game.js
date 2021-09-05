@@ -1,58 +1,13 @@
 class mini_game extends Phaser.Scene {
   constructor() {
     super("mini-game");
-    this.items = [
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-    ];
   }
   init(data) {
     this.player = data.player;
   }
   create() {
+    let json = this.cache.json.get("jogo");
+    this.items = json.mini_game;
     const event = "mini_game_ended";
     let cardGame = new CardGame(
       this,

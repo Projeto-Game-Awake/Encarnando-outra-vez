@@ -26,3 +26,6 @@ window.onload = function () {
   game = new Phaser.Game(gameConfig);
   window.focus();
 };
+
+let url = new URL(window.location.href);
+const jogo = url.searchParams.get("jogo");

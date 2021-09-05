@@ -26,6 +26,8 @@ class gameplay extends Phaser.Scene {
   }
   create() {
     scene = this;
+    let json = this.cache.json.get("jogo");
+
     this.tileScene = ["question", "choice", "mini-game", "all-in-one"];
     this.board = new Board({
       items: [0, 1, 2, 3, 4],
