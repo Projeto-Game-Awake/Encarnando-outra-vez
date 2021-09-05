@@ -1,53 +1,8 @@
 class question extends Phaser.Scene {
   constructor() {
     super("question");
-    this.items = [
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-    ];
+
+    console.log("VAI LER");
   }
   init(data) {
     this.player = data.player;
@@ -55,6 +10,8 @@ class question extends Phaser.Scene {
   create() {
     const event = "question_ended";
 
+    let json = this.cache.json.get("jogo");
+    this.items = json.question;
     let cardGame = new CardGame(
       this,
       0,
@@ -83,6 +40,5 @@ class question extends Phaser.Scene {
     console.log("------CLICOU---", result);
     this.scene.resume("main");
     this.scene.stop();
-    scene.board.nextPlayer();
   }
 }

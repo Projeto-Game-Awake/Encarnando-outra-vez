@@ -59,13 +59,9 @@ class Card extends Phaser.GameObjects.Container {
     let randIndex = Math.floor(Math.random() * 2);
 
     let rightAnswerPosition = answerPos[randIndex];
-    console.log(rightAnswerPosition);
     answerPos.splice(randIndex, 1);
 
     let wrongAnswerPosition = answerPos[0];
-
-    console.log("Right", rightAnswerPosition);
-    console.log("Wrong", wrongAnswerPosition);
 
     let rightAnswer = new Button(
       parent,
@@ -77,6 +73,7 @@ class Card extends Phaser.GameObjects.Container {
           result: true,
         };
         eventManager.publish(eventName, data);
+        eventManager.publish("right_answer");
       }
     );
 
@@ -92,6 +89,7 @@ class Card extends Phaser.GameObjects.Container {
           result: false,
         };
         eventManager.publish(eventName, data);
+        eventManager.publish("wrong_answer");
       }
     );
     wrongAnswer.visible = false;

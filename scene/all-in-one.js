@@ -1,59 +1,13 @@
 class all_in_one extends Phaser.Scene {
   constructor() {
     super("all-in-one");
-
-    this.items = [
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-    ];
   }
   init(data) {
     this.player = data.player;
   }
   create() {
+    let json = this.cache.json.get("jogo");
+    this.items = json.choice.concat(json.mini_game).concat(json.question);
     const scene = this;
     const event = "all_in_one_ended";
     let cardGame = new CardGame(
@@ -77,6 +31,5 @@ class all_in_one extends Phaser.Scene {
     console.log("------CLICOU---");
     this.scene.resume("main");
     this.scene.stop();
-    scene.board.nextPlayer();
   }
 }

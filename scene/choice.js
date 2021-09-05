@@ -1,58 +1,13 @@
 class choice extends Phaser.Scene {
   constructor() {
     super("choice");
-    this.items = [
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-    ];
   }
   init(data) {
     this.player = data.player;
   }
   create() {
+    let json = this.cache.json.get("jogo");
+    this.items = json.choice;
     const event = "choice_ended";
     let cardGame = new CardGame(
       this,
@@ -82,6 +37,5 @@ class choice extends Phaser.Scene {
     console.log("------CLICOU---", result);
     this.scene.resume("main");
     this.scene.stop();
-    scene.board.nextPlayer();
   }
 }

@@ -1,58 +1,13 @@
 class mini_game extends Phaser.Scene {
   constructor() {
     super("mini-game");
-    this.items = [
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-      {
-        question: "quanto é 1 + 1",
-        right: "2",
-        wrong: "3",
-      },
-    ];
   }
   init(data) {
     this.player = data.player;
   }
   create() {
+    let json = this.cache.json.get("jogo");
+    this.items = json.mini_game;
     const event = "mini_game_ended";
     let cardGame = new CardGame(
       this,
@@ -75,6 +30,13 @@ class mini_game extends Phaser.Scene {
       );
 
       const result = data.result;
+
+      if (result) {
+        eventManager.publish("right_answer");
+      } else {
+        eventManager.publish("wrong_answer");
+      }
+
       scene.selectCard(result);
     });
   }
@@ -82,6 +44,5 @@ class mini_game extends Phaser.Scene {
     console.log("------CLICOU---", result);
     this.scene.resume("main");
     this.scene.stop();
-    scene.board.nextPlayer();
   }
 }

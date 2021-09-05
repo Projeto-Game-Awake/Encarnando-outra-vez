@@ -16,6 +16,21 @@ class Board {
     for (let i = 0; i < gameOptions.players; i++) {
       this.players[i] = new Player(i, this.y);
     }
+
+    const board = this;
+    eventManager.subscribe("right_answer", (data) => {
+      console.log(`"Event right_answer", was published`);
+    });
+
+    eventManager.subscribe("wrong_answer", (data) => {
+      console.log(`"Event wrong_answer", was published `);
+      board.nextPlayer();
+    });
+
+    eventManager.subscribe("player_dead", (data) => {
+      console.log(`"Event player_dead", was published `);
+      board.nextPlayer();
+    });
   }
   // Cria o campo do jogo.
   generateField() {
@@ -63,6 +78,7 @@ class Board {
     return this.players[this.currentPlayerIndex];
   }
   nextPlayer() {
+    console.log("deu next");
     this.currentPlayerIndex++;
     this.currentPlayerIndex = this.currentPlayerIndex % gameOptions.players;
   }
