@@ -10,9 +10,9 @@ class death extends Phaser.Scene {
     this.selectCard();
   }
   selectCard() {
-    console.log("------CLICOU---");
     this.scene.resume("main");
     this.scene.stop();
-    scene.board.nextPlayer();
+
+    eventManager.publish("player_dead");
   }
 }

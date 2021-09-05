@@ -83,6 +83,5 @@ class question extends Phaser.Scene {
     console.log("------CLICOU---", result);
     this.scene.resume("main");
     this.scene.stop();
-    scene.board.nextPlayer();
   }
 }

@@ -75,6 +75,13 @@ class mini_game extends Phaser.Scene {
       );
 
       const result = data.result;
+
+      if (result) {
+        eventManager.publish("right_answer");
+      } else {
+        eventManager.publish("wrong_answer");
+      }
+
       scene.selectCard(result);
     });
   }
@@ -82,6 +89,5 @@ class mini_game extends Phaser.Scene {
     console.log("------CLICOU---", result);
     this.scene.resume("main");
     this.scene.stop();
-    scene.board.nextPlayer();
   }
 }

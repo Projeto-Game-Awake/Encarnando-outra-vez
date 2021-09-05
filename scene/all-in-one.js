@@ -77,6 +77,5 @@ class all_in_one extends Phaser.Scene {
     console.log("------CLICOU---");
     this.scene.resume("main");
     this.scene.stop();
-    scene.board.nextPlayer();
   }
 }
