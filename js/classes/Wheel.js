@@ -3,6 +3,9 @@ class Wheel extends Phaser.GameObjects.Container {
     console.log("Entrou");
     super(parent, x, y);
 
+    this.x = x;
+    this.y = y;
+
     console.log("Criou");
 
     this.parent = parent;
@@ -34,14 +37,30 @@ class Wheel extends Phaser.GameObjects.Container {
     style.fontSize = 48;
     style.color = "#000000";
 
-    this.spinner = this.parent.add.text(1110, 0, "Girar", style);
-    this.spinner.setOrigin(0, 0);
+    this.outsideRadius = 200;
+    this.textRadius = 160;
+    this.insideRadius = 125;
+
+    this.spinner = this.parent.add.text(
+      this.x + this.outsideRadius,
+      this.y + this.outsideRadius * 2 + 60,
+      "Girar",
+      style
+    );
+    this.spinner.setOrigin(0.5, 0);
     this.spinner.setPadding(64, 16);
     this.spinner.setInteractive();
     this.spinner.on("pointerdown", this.spin, this);
 
-    this.optionDisplay = parent.add.text(980, 230, "", style);
-    this.optionDisplay.setOrigin(0, 0);
+    this.optionDisplay = parent.add.text(
+      this.x + this.outsideRadius,
+      this.y + this.outsideRadius,
+      "",
+      style
+    );
+
+    this.optionDisplay.setOrigin(0.5, 0);
+
     this.optionDisplay.setInteractive();
     this.optionDisplay.on("pointerdown", this.spin, this);
 
@@ -53,10 +72,8 @@ class Wheel extends Phaser.GameObjects.Container {
   }
 
   drawRouletteWheel() {
-    let outsideRadius = 200;
-    let textRadius = 160;
-    let insideRadius = 125;
-    let x = 1000;
+    let x = this.x + this.outsideRadius;
+    let y = this.y + this.outsideRadius;
 
     this.ctx.strokeStyle = "black";
     this.ctx.lineWidth = 2;
@@ -68,8 +85,8 @@ class Wheel extends Phaser.GameObjects.Container {
       this.ctx.fillStyle(this.getRouletteColor(i));
 
       this.ctx.beginPath();
-      this.ctx.arc(x, 250, outsideRadius, angle, angle + this.arc, false);
-      this.ctx.arc(x, 250, 0, angle + this.arc, angle, true);
+      this.ctx.arc(x, y, this.outsideRadius, angle, angle + this.arc, false);
+      this.ctx.arc(x, y, 0, angle + this.arc, angle, true);
       this.ctx.stroke();
       this.ctx.fill();
 
@@ -80,26 +97,25 @@ class Wheel extends Phaser.GameObjects.Container {
       this.ctx.shadowColor = "rgb(220,220,220)";
 
       this.ctx.translateCanvas(
-        250 + Math.cos(angle + this.arc / 2) * textRadius,
-        250 + Math.sin(angle + this.arc / 2) * textRadius
+        y + Math.cos(angle + this.arc / 2) * this.textRadius,
+        y + Math.sin(angle + this.arc / 2) * this.textRadius
       );
       this.ctx.rotateCanvas(angle + this.arc / 2 + Math.PI / 2);
       let text = this.options[i];
-      //this.ctx.fillText(text, -10 / 2, 0);
       this.ctx.restore();
     }
 
     //Arrow
     this.ctx.fillStyle(0x000000);
     this.ctx.beginPath();
-    this.ctx.moveTo(x - 4, 250 - (outsideRadius + 5));
-    this.ctx.lineTo(x + 4, 250 - (outsideRadius + 5));
-    this.ctx.lineTo(x + 4, 250 - (outsideRadius - 5));
-    this.ctx.lineTo(x + 9, 250 - (outsideRadius - 5));
-    this.ctx.lineTo(x + 0, 250 - (outsideRadius - 13));
-    this.ctx.lineTo(x - 9, 250 - (outsideRadius - 5));
-    this.ctx.lineTo(x - 4, 250 - (outsideRadius - 5));
-    this.ctx.lineTo(x - 4, 250 - (outsideRadius + 5));
+    this.ctx.moveTo(x - 4, y - (this.outsideRadius + 5));
+    this.ctx.lineTo(x + 4, y - (this.outsideRadius + 5));
+    this.ctx.lineTo(x + 4, y - (this.outsideRadius - 5));
+    this.ctx.lineTo(x + 9, y - (this.outsideRadius - 5));
+    this.ctx.lineTo(x + 0, y - (this.outsideRadius - 13));
+    this.ctx.lineTo(x - 9, y - (this.outsideRadius - 5));
+    this.ctx.lineTo(x - 4, y - (this.outsideRadius - 5));
+    this.ctx.lineTo(x - 4, y - (this.outsideRadius + 5));
     this.ctx.fill();
   }
 
@@ -130,8 +146,6 @@ class Wheel extends Phaser.GameObjects.Container {
     this.option = this.options[index];
     this.optionDisplay.setText(this.option);
     this.parent.children.bringToTop(this.optionDisplay);
-
-    console.log("Vai andar");
 
     const amount = this.options[index];
 

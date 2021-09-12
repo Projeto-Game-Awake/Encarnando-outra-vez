@@ -1,15 +1,15 @@
 class Player {
-  constructor(x, y) {
+  constructor(x, y, index) {
     this.x = x;
-    this.y = y;
+    this.y = y - gameOptions.tileHeightHalf * 2;
+
+    console.log("INIT", this.x, this.y);
     this.pos = -1;
-    let sprite = scene.add.sprite(
-      gameOptions.tileSize * x,
-      0,
-      "animals",
-      x % 5
-    );
-    sprite.setOrigin(0, 0);
+    let sprite = scene.add.sprite(this.x, this.y, "animals_3d", index % 5);
+
+    sprite.setScale(2, 2);
+
+    sprite.setOrigin(0.5, 0.5);
     this.sprite = sprite;
     this.death = Phaser.Math.Between(20, 120);
     this.age = Phaser.Math.Between(0, 20);
@@ -17,13 +17,30 @@ class Player {
     console.log("Morte", this.death);
 
     eventManager.subscribe("player_walk", (data) => {
-      console.log(`"anEvent", was published with this data: `);
+      console.log(`"WALK", was published with this data: `);
     });
   }
+
+  convertMove(x, y) {
+    return coordinate.twoDToIso(x, y);
+  }
+
   doMove() {
     let direction = scene.board.path[++this.pos].direction;
     let current = scene.board.direction[direction];
-    this.x += current.x;
-    this.y += current.y;
+
+    console.log("DIRECTION", direction);
+    console.log("CURRENT", current);
+
+    let move = this.convertMove(current.x, current.y);
+
+    console.log("MOVE", move);
+
+    console.log("ANTES", this.x, this.y);
+
+    this.x += move.x;
+    this.y += move.y;
+
+    console.log("DEPOIS", this.x, this.y);
   }
 }

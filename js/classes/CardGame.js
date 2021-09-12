@@ -21,8 +21,6 @@ class CardGame extends Phaser.GameObjects.Container {
       let i = count % maxWidth;
       let j = Math.floor(count / maxWidth);
 
-      console.log(i, j);
-
       let card = new Card(
         parent,
         50 + 120 * j * scale,

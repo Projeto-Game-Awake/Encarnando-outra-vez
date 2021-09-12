@@ -3,10 +3,13 @@ var height = screen.height;
 var scene;
 
 var gameOptions = {
-  tileSize: 64,
+  tileSize: 32,
+  tileWidthHalf: 40,
+  tileHeightHalf: 24,
 };
 
 var eventManager = new EventManager();
+var coordinate = new Coordinate();
 
 window.onload = function () {
   let gameConfig = {
