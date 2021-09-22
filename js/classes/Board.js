@@ -1,14 +1,17 @@
-class Board {
+class Board extends Phaser.GameObjects.Container {
   // Construtor
-  constructor(obj) {
+  constructor(parent, obj) {
     if (obj == undefined) {
       obj = {};
     }
+
+    super(parent, 600, 600, []);
     this.rows = obj.rows != undefined ? obj.rows : 5;
     this.columns = obj.columns != undefined ? obj.columns : 2;
     this.items = obj.items != undefined ? obj.items : [0, 1, 2, 3, 4];
     this.x = obj.x;
     this.y = obj.y;
+    this.parent = parent;
     this.mapWidth = 15;
     this.mapHeight = 15;
     this.direction = [];
@@ -21,14 +24,6 @@ class Board {
 
     this.players = [];
     this.currentPlayerIndex = 0;
-
-    for (let i = 0; i < gameOptions.players; i++) {
-      this.players[i] = new Player(
-        this.initX + i * gameOptions.tileWidthHalf * 2,
-        this.initY,
-        i
-      );
-    }
 
     const board = this;
     eventManager.subscribe("right_answer", (data) => {
@@ -44,6 +39,8 @@ class Board {
       console.log(`"Event player_dead", was published `);
       board.nextPlayer();
     });
+
+    parent.add.existing(this);
   }
 
   initBlockTypes() {
@@ -57,20 +54,20 @@ class Board {
 
   drawBoard() {
     var tileWidthHalf = gameOptions.tileWidthHalf;
-    var tileHeightHalf = gameOptions.tileHeightHalf;
 
     var initX = 300 + (this.mapWidth / 2) * tileWidthHalf;
     var initY = 100;
 
-    let container = scene.add.container(0, 0);
     for (var y = 0; y < this.mapHeight; y++) {
       for (var x = 0; x < this.mapWidth; x++) {
-        var tx = (x - y) * tileWidthHalf;
-        var ty = (x + y) * tileHeightHalf;
+        let deltaPos = coordinate.twoDToIso(x, y);
+
+        var tx = deltaPos.x;
+        var ty = deltaPos.y;
 
         let block;
         let type = this.blocks[y][x];
-        block = new Block(scene, initX + tx, initY + ty, type);
+        block = new Block(this.parent, initX + tx, initY + ty, type);
 
         if (x == 0 && y == 0) {
           console.log("0,0", block.x, block.y);
@@ -90,27 +87,27 @@ class Board {
 
         this.blocks[y][x] = type;
 
-        container.add([block]);
+        this.add([block]);
       }
     }
   }
   // Cria o campo do jogo.
   generateField() {
     this.direction[Direction.DOWN] = {
-      x: 1,
-      y: 0,
-    };
-    this.direction[Direction.LEFT] = {
-      x: 0,
-      y: -1,
-    };
-    this.direction[Direction.RIGHT] = {
       x: 0,
       y: 1,
     };
-    this.direction[Direction.UP] = {
+    this.direction[Direction.LEFT] = {
       x: -1,
       y: 0,
+    };
+    this.direction[Direction.RIGHT] = {
+      x: 1,
+      y: 0,
+    };
+    this.direction[Direction.UP] = {
+      x: 0,
+      y: -1,
     };
     this.selectedItem = -1;
     this.foundCount = 0;
@@ -136,18 +133,20 @@ class Board {
     return this.path[player.pos + 1].type;
   }
   getCurrentPlayer() {
+    console.log("Players", this.players);
+    console.log(this.currentPlayerIndex);
     return this.players[this.currentPlayerIndex];
   }
   nextPlayer() {
-    console.log("deu next");
+    console.log("VAI DAR NEXT", this.currentPlayerIndex);
     this.currentPlayerIndex++;
+
     this.currentPlayerIndex = this.currentPlayerIndex % gameOptions.players;
+    console.log("NEXT", this.currentPlayerIndex);
   }
   updatePlace(y, x, direction) {
     let type = this.generateType();
-    let container = scene.add.container(0, 0);
     this.path.push({
-      container,
       type,
       direction,
     });
@@ -156,6 +155,19 @@ class Board {
   }
   start() {
     this.option = -1;
-    this.well = new Wheel(scene, 1100, 300);
+
+    for (let i = 0; i < gameOptions.players; i++) {
+      console.log(
+        "Player",
+        this.initX + i * gameOptions.tileWidthHalf * 2,
+        this.initY
+      );
+      this.players[i] = new Player(
+        this.parent,
+        this.initX + i * gameOptions.tileWidthHalf * 2,
+        this.initY,
+        i
+      );
+    }
   }
 }

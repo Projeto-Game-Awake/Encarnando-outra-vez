@@ -8,7 +8,14 @@ class Block extends Phaser.GameObjects.Container {
       "block-087",
     ];
 
-    var blockImage = parent.add.image(0, 0, "isoblocks", blocks[type]);
+    var blockImage = new Phaser.GameObjects.Sprite(
+      parent,
+      0,
+      0,
+      "isoblocks",
+      blocks[type]
+    );
+    // var blockImage = parent.add.image(0, 0, "isoblocks", blocks[type]);
     blockImage.setScale(2, 2);
 
     super(parent, x, y, [blockImage]);
@@ -16,6 +23,8 @@ class Block extends Phaser.GameObjects.Container {
     this.parent = parent;
     this.blocks = blocks;
     this.blockImage = blockImage;
+
+    parent.add.existing(this);
   }
 
   updateBlock(type) {

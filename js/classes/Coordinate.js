@@ -1,9 +1,8 @@
 class Coordinate {
   //CONVERT POINT TO ISOMETRIC
-  twoDToIso(y, x) {
-    let tempx = x * gameOptions.tileWidthHalf + y * gameOptions.tileWidthHalf;
-    let tempy = y * gameOptions.tileHeightHalf - x * gameOptions.tileHeightHalf;
-
+  twoDToIso(x, y) {
+    var tempx = (x - y) * gameOptions.tileWidthHalf;
+    var tempy = (x + y) * gameOptions.tileHeightHalf;
     return {
       x: tempx,
       y: tempy,
