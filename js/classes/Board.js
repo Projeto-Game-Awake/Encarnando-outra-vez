@@ -1,36 +1,80 @@
-class Board {
+class Board extends Phaser.GameObjects.Container {
   // Construtor
-  constructor(obj) {
+  constructor(parent, obj) {
     if (obj == undefined) {
       obj = {};
     }
+
+    super(parent, 600, 600, []);
     this.rows = obj.rows != undefined ? obj.rows : 5;
     this.columns = obj.columns != undefined ? obj.columns : 2;
     this.items = obj.items != undefined ? obj.items : [0, 1, 2, 3, 4];
     this.x = obj.x;
     this.y = obj.y;
+    this.parent = parent;
+    this.mapWidth = 15;
+    this.mapHeight = 15;
     this.direction = [];
     this.path = [];
+    this.blocks = {};
+    this.initBlockTypes();
+
+    this.initX = 300 + (this.mapWidth / 2) * gameOptions.tileWidthHalf;
+    this.initY = 100;
+
     this.players = [];
     this.currentPlayerIndex = 0;
-    for (let i = 0; i < gameOptions.players; i++) {
-      this.players[i] = new Player(i, this.y);
-    }
 
     const board = this;
-    eventManager.subscribe("right_answer", (data) => {
-      console.log(`"Event right_answer", was published`);
-    });
+    eventManager.subscribe("right_answer", (data) => {});
 
     eventManager.subscribe("wrong_answer", (data) => {
-      console.log(`"Event wrong_answer", was published `);
       board.nextPlayer();
     });
 
     eventManager.subscribe("player_dead", (data) => {
-      console.log(`"Event player_dead", was published `);
       board.nextPlayer();
     });
+
+    parent.add.existing(this);
+  }
+
+  initBlockTypes() {
+    for (let y = 0; y < this.mapWidth; y++) {
+      this.blocks[y] = {};
+      for (let x = 0; x < this.mapHeight; x++) {
+        this.blocks[y][x] = 4;
+      }
+    }
+  }
+
+  drawBoard() {
+    var tileWidthHalf = gameOptions.tileWidthHalf;
+
+    var initX = 300 + (this.mapWidth / 2) * tileWidthHalf;
+    var initY = 100;
+
+    for (var y = 0; y < this.mapHeight; y++) {
+      for (var x = 0; x < this.mapWidth; x++) {
+        let deltaPos = coordinate.twoDToIso(x, y);
+
+        var tx = deltaPos.x;
+        var ty = deltaPos.y;
+
+        let block;
+        let type = this.blocks[y][x];
+        block = new Block(this.parent, initX + tx, initY + ty, type);
+
+        block.setData("row", x);
+        block.setData("col", y);
+
+        block.setDepth(initY + ty);
+
+        this.blocks[y][x] = type;
+
+        this.add([block]);
+      }
+    }
   }
   // Cria o campo do jogo.
   generateField() {
@@ -52,10 +96,8 @@ class Board {
     };
     this.selectedItem = -1;
     this.foundCount = 0;
-    this.position = 0;
     this.x = 0;
     this.y = 0;
-    this.colors = [0x0000ff, 0xffff00, 0xff0000, 0xffffff];
   }
   addLine(count, direction) {
     let current = this.direction[direction];
@@ -65,7 +107,8 @@ class Board {
     for (let i = 0; i < count; i++) {
       this.x += current.x;
       this.y += current.y;
-      this.drawPlace(this.x, this.y, direction);
+
+      this.updatePlace(this.y, this.x, direction);
     }
   }
   generateType() {
@@ -78,26 +121,25 @@ class Board {
     return this.players[this.currentPlayerIndex];
   }
   nextPlayer() {
-    console.log("deu next");
     this.currentPlayerIndex++;
+
     this.currentPlayerIndex = this.currentPlayerIndex % gameOptions.players;
   }
-  drawPlace(j, i, direction) {
-    let x = gameOptions.tileSize * j;
-    let y = gameOptions.tileSize * i;
+  updatePlace(y, x, direction) {
     let type = this.generateType();
-    let container = scene.add.container(0, 0);
     this.path.push({
-      container,
       type,
       direction,
     });
-    let logo = scene.add.rectangle(x + 30, y + 30, 62, 62, this.colors[type]);
 
-    container.add([logo]);
+    this.blocks[y][x] = type;
   }
   start() {
     this.option = -1;
-    this.well = new Wheel(scene, 0, 0);
+
+    for (let i = 0; i < gameOptions.players; i++) {
+      const playerPos = coordinate.relativeToAbsolutePosition(i, 0);
+      this.players[i] = new Player(this.parent, playerPos.x, playerPos.y, i);
+    }
   }
 }

@@ -1,8 +1,6 @@
 class question extends Phaser.Scene {
   constructor() {
     super("question");
-
-    console.log("VAI LER");
   }
   init(data) {
     this.player = data.player;
@@ -26,18 +24,11 @@ class question extends Phaser.Scene {
 
     const scene = this;
     eventManager.subscribe(event, (data) => {
-      console.log(
-        `"anEvent", was published with this data: ${JSON.stringify(
-          data
-        )} question`
-      );
-
       const result = data.result;
       scene.selectCard(result);
     });
   }
   selectCard(result) {
-    console.log("------CLICOU---", result);
     this.scene.resume("main");
     this.scene.stop();
   }

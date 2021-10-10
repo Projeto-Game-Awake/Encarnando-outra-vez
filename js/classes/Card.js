@@ -124,6 +124,23 @@ class Card extends Phaser.GameObjects.Container {
 
     this.parent = parent;
 
+    eventManager.subscribe("right_answer", (data) => {
+      console.log("--MATOU---");
+      this.destroy();
+    });
+
+    eventManager.subscribe("wrong_answer", (data) => {
+      console.log("----MATOU");
+      this.destroy();
+    });
+
+    let card = this;
+    // eventManager.subscribe("card_turned", (data) => {
+    //   if (data != card) {
+    //     card.setInteractive(false);
+    //   }
+    // });
+
     parent.add.existing(this);
   }
 
@@ -140,6 +157,8 @@ class Card extends Phaser.GameObjects.Container {
     this.x = 0;
     this.y = 0;
     this.parent.children.bringToTop(this);
+
+    eventManager.publish("card_turned", this);
   }
 
   turnCard() {}

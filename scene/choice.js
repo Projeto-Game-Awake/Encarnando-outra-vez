@@ -23,18 +23,11 @@ class choice extends Phaser.Scene {
 
     const scene = this;
     eventManager.subscribe(event, (data) => {
-      console.log(
-        `"anEvent", was published with this data: ${JSON.stringify(
-          data
-        )} choice`
-      );
-
       const result = data.result;
       scene.selectCard(result);
     });
   }
   selectCard(result) {
-    console.log("------CLICOU---", result);
     this.scene.resume("main");
     this.scene.stop();
   }

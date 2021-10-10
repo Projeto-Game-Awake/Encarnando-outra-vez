@@ -23,12 +23,6 @@ class mini_game extends Phaser.Scene {
 
     const scene = this;
     eventManager.subscribe(event, (data) => {
-      console.log(
-        `"anEvent", was published with this data: ${JSON.stringify(
-          data
-        )} mini-game`
-      );
-
       const result = data.result;
 
       if (result) {
@@ -41,7 +35,6 @@ class mini_game extends Phaser.Scene {
     });
   }
   selectCard(result) {
-    console.log("------CLICOU---", result);
     this.scene.resume("main");
     this.scene.stop();
   }
