@@ -15,7 +15,6 @@ class Block extends Phaser.GameObjects.Container {
       "isoblocks",
       blocks[type]
     );
-    // var blockImage = parent.add.image(0, 0, "isoblocks", blocks[type]);
     blockImage.setScale(2, 2);
 
     super(parent, x, y, [blockImage]);

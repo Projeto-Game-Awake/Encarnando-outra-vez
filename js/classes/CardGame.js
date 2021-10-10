@@ -14,10 +14,12 @@ class CardGame extends Phaser.GameObjects.Container {
 
     this.scale = scale;
     let maxWidth = 3;
+    let maxCards = 9;
 
     let count = 0;
 
-    while (count < items.length) {
+    const lastIndex = items.length > maxCards ? maxCards : items.length;
+    while (count < lastIndex) {
       let i = count % maxWidth;
       let j = Math.floor(count / maxWidth);
 

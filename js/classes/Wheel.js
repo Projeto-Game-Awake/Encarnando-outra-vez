@@ -1,12 +1,9 @@
 class Wheel extends Phaser.GameObjects.Container {
   constructor(parent, x, y) {
-    console.log("Entrou");
     super(parent, x, y);
 
     this.x = x;
     this.y = y;
-
-    console.log("Criou");
 
     this.parent = parent;
 

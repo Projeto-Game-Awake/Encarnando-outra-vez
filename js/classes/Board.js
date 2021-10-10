@@ -26,17 +26,13 @@ class Board extends Phaser.GameObjects.Container {
     this.currentPlayerIndex = 0;
 
     const board = this;
-    eventManager.subscribe("right_answer", (data) => {
-      console.log(`"Event right_answer", was published`);
-    });
+    eventManager.subscribe("right_answer", (data) => {});
 
     eventManager.subscribe("wrong_answer", (data) => {
-      console.log(`"Event wrong_answer", was published `);
       board.nextPlayer();
     });
 
     eventManager.subscribe("player_dead", (data) => {
-      console.log(`"Event player_dead", was published `);
       board.nextPlayer();
     });
 
@@ -68,17 +64,6 @@ class Board extends Phaser.GameObjects.Container {
         let block;
         let type = this.blocks[y][x];
         block = new Block(this.parent, initX + tx, initY + ty, type);
-
-        if (x == 0 && y == 0) {
-          console.log("0,0", block.x, block.y);
-        }
-        if (x == 1 && y == 0) {
-          console.log("1,0", block.x, block.y);
-        }
-
-        if (x == 2 && y == 0) {
-          console.log("0,1", block.x, block.y);
-        }
 
         block.setData("row", x);
         block.setData("col", y);
@@ -133,16 +118,12 @@ class Board extends Phaser.GameObjects.Container {
     return this.path[player.pos + 1].type;
   }
   getCurrentPlayer() {
-    console.log("Players", this.players);
-    console.log(this.currentPlayerIndex);
     return this.players[this.currentPlayerIndex];
   }
   nextPlayer() {
-    console.log("VAI DAR NEXT", this.currentPlayerIndex);
     this.currentPlayerIndex++;
 
     this.currentPlayerIndex = this.currentPlayerIndex % gameOptions.players;
-    console.log("NEXT", this.currentPlayerIndex);
   }
   updatePlace(y, x, direction) {
     let type = this.generateType();
@@ -157,17 +138,8 @@ class Board extends Phaser.GameObjects.Container {
     this.option = -1;
 
     for (let i = 0; i < gameOptions.players; i++) {
-      console.log(
-        "Player",
-        this.initX + i * gameOptions.tileWidthHalf * 2,
-        this.initY
-      );
-      this.players[i] = new Player(
-        this.parent,
-        this.initX + i * gameOptions.tileWidthHalf * 2,
-        this.initY,
-        i
-      );
+      const playerPos = coordinate.relativeToAbsolutePosition(i, 0);
+      this.players[i] = new Player(this.parent, playerPos.x, playerPos.y, i);
     }
   }
 }

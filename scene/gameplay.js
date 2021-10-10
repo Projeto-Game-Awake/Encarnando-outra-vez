@@ -59,9 +59,6 @@ class gameplay extends Phaser.Scene {
     let gameplay = this;
 
     eventManager.subscribe("wheel_finished", (data) => {
-      console.log(
-        `"anEvent", was published with this data: ${JSON.stringify(data)}`
-      );
       gameplay.doPlayerMove(data);
     });
   }

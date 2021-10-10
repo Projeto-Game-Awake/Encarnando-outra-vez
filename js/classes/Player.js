@@ -22,12 +22,8 @@ class Player extends Phaser.GameObjects.Container {
     this.sprite = sprite;
     this.death = Phaser.Math.Between(20, 120);
     this.age = Phaser.Math.Between(0, 20);
-    console.log("Idade", this.age);
-    console.log("Morte", this.death);
 
-    eventManager.subscribe("player_walk", (data) => {
-      console.log(`"WALK", was published with this data: `);
-    });
+    eventManager.subscribe("player_walk", (data) => {});
 
     parent.add.existing(this);
   }
@@ -57,8 +53,6 @@ class Player extends Phaser.GameObjects.Container {
 
     const deltaY = this.convertPosition(0, 1);
 
-    console.log("INITIALPOS");
-
     return {
       x: zeroPos.x + deltaY.x,
       y: zeroPos.y + deltaY.y,
@@ -71,8 +65,6 @@ class Player extends Phaser.GameObjects.Container {
 
     let timeLine = this.parent.tweens.createTimeline();
 
-    console.log(path);
-
     let current = 0;
 
     let gotoX = this.x;
@@ -84,32 +76,22 @@ class Player extends Phaser.GameObjects.Container {
       gotoX = initPosition.x;
       gotoY = initPosition.y;
 
-      this.gotoPosition(timeLine, gotoX, gotoY, function () {
-        console.log("INICIAL=>", player.x, player.y);
-      });
+      this.gotoPosition(timeLine, gotoX, gotoY, function () {});
       timeLine.play();
     }
 
     timeLine = this.parent.tweens.createTimeline();
 
-    console.log("Posicao Inicial", gotoX, gotoY);
-
     while (current < distance) {
       let direction = path[++this.pos].direction;
-      console.log("POS", this.pos, direction);
       let deltaMove = scene.board.direction[direction];
 
       let move = this.convertPosition(deltaMove.x, deltaMove.y);
-      console.log("Delta=> ", move);
 
       gotoX += move.x;
       gotoY += move.y;
 
-      console.log("GOTO", gotoX, gotoY);
-
-      this.gotoPosition(timeLine, gotoX, gotoY, function () {
-        console.log("A=>", player.x, player.y);
-      });
+      this.gotoPosition(timeLine, gotoX, gotoY, function () {});
       current++;
     }
 
