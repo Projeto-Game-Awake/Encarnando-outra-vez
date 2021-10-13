@@ -1,0 +1,19 @@
+[
+  {
+    "name":"CardOnly2",
+    "question": [
+      {
+        "question": "Como",
+        "right": "2",
+        "wrong": "3"
+      }
+    ],
+    "rules": [
+      "CardOnly2Simple",
+      "CardOnly2Double",
+      "CardOnly2Nothing",
+      "CardOnly2Stop"
+    ]
+  }
+]
+

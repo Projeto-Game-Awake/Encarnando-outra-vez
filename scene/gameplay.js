@@ -36,6 +36,7 @@ class gameplay extends Phaser.Scene {
   create() {
     scene = this;
     let json = this.cache.json.get("jogo");
+    cardRules = json;
 
     var frames = this.textures.get("isoblocks").getFrameNames();
 

@@ -10,7 +10,7 @@ class start extends Phaser.Scene {
   create() {
     scene = this;
 
-    var element = this.add.dom(width / 2, 0).createFromCache("start");
+    let element = this.add.dom(width / 2, 0).createFromCache("start");
 
     element.addListener("click");
 

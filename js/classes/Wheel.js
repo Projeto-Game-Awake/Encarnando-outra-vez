@@ -26,7 +26,7 @@ class Wheel extends Phaser.GameObjects.Container {
       fontSize: 24,
       fontFamily: "Arial",
       align: "left",
-      backgroundColor: "#68b5e9",
+      backgroundColor: "#555555",
       color: "#FFFFFF",
       wordWrap: { width: 300, useAdvancedWrap: true },
     };

@@ -10,6 +10,7 @@ var gameOptions = {
 
 var eventManager = new EventManager();
 var coordinate = new Coordinate();
+var cardRules = [];
 
 window.onload = function () {
   let gameConfig = {

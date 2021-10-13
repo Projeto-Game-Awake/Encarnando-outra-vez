@@ -1,6 +1,10 @@
 class question extends Phaser.Scene {
-  constructor() {
-    super("question");
+  constructor(name = null) {
+    if(name == null) {
+      super("question");
+    } else {
+      super(name);
+    }
   }
   init(data) {
     this.player = data.player;
@@ -9,8 +13,9 @@ class question extends Phaser.Scene {
     const event = "question_ended";
 
     let json = this.cache.json.get("jogo");
-    this.items = json.question;
-    let cardGame = new CardGame(
+    this.items = this.getItems(json);
+
+    this.cardGame = new CardGame(
       this,
       0,
       0,
@@ -19,7 +24,8 @@ class question extends Phaser.Scene {
       1,
       0,
       event,
-      this.items
+      this.items,
+      0
     );
 
     const scene = this;
@@ -28,8 +34,12 @@ class question extends Phaser.Scene {
       scene.selectCard(result);
     });
   }
+  getItems(json) {
+    return json[1].question;
+  }
   selectCard(result) {
     this.scene.resume("main");
+    this.cardGame.clear();
     this.scene.stop();
   }
 }
