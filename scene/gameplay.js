@@ -20,10 +20,9 @@ class gameplay extends Phaser.Scene {
       frameWidth: 240,
       frameHeight: 338,
     });
-    this.load.spritesheet("fundoCarta2", "static/sprites/fundoCarta2.png", {
-      frameWidth: 240,
-      frameHeight: 338,
-    });
+    
+    this.load.image("wheel", "static/images/wheel.png");
+    this.load.image("pin", "static/images/pin.png");
 
     this.load.atlas(
       "isoblocks",
@@ -35,8 +34,7 @@ class gameplay extends Phaser.Scene {
   }
   create() {
     scene = this;
-    let json = this.cache.json.get("jogo");
-    cardRules = json;
+    json = this.cache.json.get("jogo");
 
     var frames = this.textures.get("isoblocks").getFrameNames();
 
@@ -47,7 +45,18 @@ class gameplay extends Phaser.Scene {
       y: 1,
     });
 
-    this.well = new Wheel(scene, 1100, 300);
+    if(isMobile()) {
+      this.well = new Wheel(scene, 1200, 1100);
+    } else {
+      this.well = new Wheel(scene, 1300, 300);
+    }
+
+    this.endButton = this.add.text(50,50,"Encerrar", {
+      fontSize: 80,
+      backgroundColor: "#00ff00"
+    });
+    this.endButton.setInteractive();
+    this.endButton.on("pointerdown",this.showResult,this);
 
     this.objects.camera = this.cameras.add(0, 0, width, height);
     this.objects.camera.setBackgroundColor("rgba(255, 255, 255, 0.5)");
@@ -62,6 +71,10 @@ class gameplay extends Phaser.Scene {
     eventManager.subscribe("wheel_finished", (data) => {
       gameplay.doPlayerMove(data);
     });
+  }
+  showResult() {
+    this.endButton.alpha = 0;
+    this.scene.launch("result", {players:this.board.getPlayers()});
   }
   update(time, delta) {}
   doPlayerMove(data) {

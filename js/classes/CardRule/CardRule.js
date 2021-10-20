@@ -12,8 +12,8 @@ class CardRule extends Phaser.GameObjects.Container {
     ) {
       let frontImage = new Phaser.GameObjects.Sprite(
         parent,
-        x,
-        y,
+        0,
+        0,
         image,
         frontIndex
       );
@@ -29,78 +29,49 @@ class CardRule extends Phaser.GameObjects.Container {
       let xPos = x + (scale * frontImage.width) / 2;
       let yPos = y + 20;
       let style = {
-        fontSize: 24,
+        fontSize: isMobile() ? 20 : 10,
         fontFamily: "Arial",
         align: "left",
         color: "#000000",
-        wordWrap: { width: 100, useAdvancedWrap: true },
+        wordWrap: { width: 400, useAdvancedWrap: true },
       };
-  
-      let question = scene.add.text(xPos, yPos, item.question, style);
-      question.setOrigin(0.5, 0);
+
+      let question = scene.add.text(10, 20, item.question, style);
       question.visible = false;
+
+      let startY = 100;
+
+      let answers = [];
+      item.answers = CardGame.suffle(item.answers);
+      for(let i=0;i<item.answers.length;i++) {
+        let answer = new Button(
+          parent,
+          25,
+          startY,
+          (i+1) + " - " + item.answers[i].text,
+          function () {
+            const data = {
+              result: true,
+            };
+            eventManager.publish(eventName,item.answers[i]);
+            eventManager.publish("answer",item.answers[i]);
+          }
+        );
+        answer.visible = false;  
+        answers.push(answer);
+        startY += 20;
+      }
   
-      let answerPos = [];
-      let answerDeltaY = 20;
-  
-      answerPos.push(
-        {
-          x: xPos,
-          y: yPos + scale * (frontImage.height / 2),
-          letter: "A",
-        },
-        {
-          x: xPos,
-          y: yPos + scale * (frontImage.height / 2) + answerDeltaY,
-          letter: "B",
-        }
-      );
-  
-      let randIndex = Math.floor(Math.random() * 2);
-  
-      let rightAnswerPosition = answerPos[randIndex];
-      answerPos.splice(randIndex, 1);
-  
-      let wrongAnswerPosition = answerPos[0];
-  
-      let rightAnswer = new Button(
-        parent,
-        rightAnswerPosition.x,
-        rightAnswerPosition.y,
-        `${rightAnswerPosition.letter}: ${item.right}`,
-        function () {
-          const data = {
-            result: true,
-          };
-          eventManager.publish(eventName, data);
-          eventManager.publish("right_answer");
-        }
-      );
-  
-      rightAnswer.visible = false;
-  
-      let wrongAnswer = new Button(
-        parent,
-        wrongAnswerPosition.x,
-        wrongAnswerPosition.y,
-        `${wrongAnswerPosition.letter}: ${item.wrong}`,
-        function () {
-          const data = {
-            result: false,
-          };
-          eventManager.publish(eventName, data);
-          eventManager.publish("wrong_answer");
-        }
-      );
-      wrongAnswer.visible = false;
-  
-      super(parent, x, y, [
+      let elements = [
         frontImage,
         backImage,
-        question,
-        rightAnswer,
-        wrongAnswer,
-      ]);
+        question
+      ]
+      for(let i=0;i<answers.length;i++) {
+        elements.push(answers[i]);
+      }
+
+      super(parent, x, y, elements);
   
       frontImage.setScale(scale, scale);
   
@@ -119,25 +90,20 @@ class CardRule extends Phaser.GameObjects.Container {
       this.backImage = backImage;
       this.eventName = eventName;
       this.question = question;
-      this.rightAnswer = rightAnswer;
-      this.wrongAnswer = wrongAnswer;
+      this.answers = answers;
   
       this.parent = parent;
   
-      eventManager.subscribe("right_answer", (data) => {
-        this.destroy();
-      });
-  
-      eventManager.subscribe("wrong_answer", (data) => {
+      eventManager.subscribe("answer", (data) => {
         this.destroy();
       });
   
       let card = this;
-      // eventManager.subscribe("card_turned", (data) => {
-      //   if (data != card) {
-      //     card.setInteractive(false);
-      //   }
-      // });
+      eventManager.subscribe("card_turned", (data) => {
+         if (data != card) {
+           //card.setInteractive(false);
+         }
+      });
   
       parent.add.existing(this);
     }
@@ -148,17 +114,24 @@ class CardRule extends Phaser.GameObjects.Container {
       this.frontImage.visible = true;
       this.question.visible = true;
   
-      this.rightAnswer.visible = true;
-      this.wrongAnswer.visible = true;
+      for(let i=0;i<this.answers.length;i++) {
+        this.answers[i].visible = true;
+      }
   
-      this.setScale(2, 2);
-      this.x = 0;
-      this.y = 0;
+      if(isMobile()) {
+        this.setScale(10,10);
+      } else {
+        this.setScale(5,5);
+      }
+
+      this.x = 10;
+      this.y = 10;
       this.parent.children.bringToTop(this);
   
       eventManager.publish("card_turned", this);
     }
   
     turnCard() {}
-  }
+  
+}
   

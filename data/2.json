@@ -1,19 +1,130 @@
 [
   {
-    "name":"CardOnly2",
-    "question": [
+    "mini_game": [
       {
-        "question": "Como",
-        "right": "2",
-        "wrong": "3"
+        "question": "quanto é 1 + 1",
+        "answers":[
+          {
+            "text":"2",
+            "point":1
+          },
+          {
+            "text":"3",
+            "point":-1
+          },
+          {
+            "text":"4",
+            "point":-1
+          },
+          {
+            "text":"1",
+            "point":-1
+          },
+          {
+            "text":"0",
+            "point":-1
+          }
+        ]
       }
     ],
-    "rules": [
-      "CardOnly2Simple",
-      "CardOnly2Double",
-      "CardOnly2Nothing",
-      "CardOnly2Stop"
+    "rule": [
+      "QuestionOnly2Simple"
+    ]
+  },
+  {
+    "question": [
+      {
+        "question": "quanto é 1 + 1",
+        "answers":[
+          {
+            "text":"2",
+            "point":1
+          },
+          {
+            "text":"3",
+            "point":-1
+          },
+          {
+            "text":"4",
+            "point":-1
+          },
+          {
+            "text":"1",
+            "point":-1
+          },
+          {
+            "text":"0",
+            "point":-1
+          }
+        ]
+      }
+    ],
+    "rule": [
+      "QuestionOnly2Double"
+    ]
+  },
+  {
+    "choice": [
+      {
+        "question": "quanto é 1 + 1",
+        "answers":[
+          {
+            "text":"2",
+            "point":1
+          },
+          {
+            "text":"3",
+            "point":-1
+          },
+          {
+            "text":"4",
+            "point":-1
+          },
+          {
+            "text":"1",
+            "point":-1
+          },
+          {
+            "text":"0",
+            "point":-1
+          }
+        ]
+      }
+    ],
+    "rule": [
+      "QuestionOnly2Nothing"
+    ]
+  },
+  {
+    "all-in-one": [
+      {
+        "question": "quanto é 1 + 1",
+        "answers":[
+          {
+            "text":"2",
+            "point":1
+          },
+          {
+            "text":"3",
+            "point":-1
+          },
+          {
+            "text":"4",
+            "point":-1
+          },
+          {
+            "text":"1",
+            "point":-1
+          },
+          {
+            "text":"0",
+            "point":-1
+          }
+        ]
+      }
+    ],
+    "rule": [
+      "QuestionOnly2Stop"
     ]
   }
 ]
-

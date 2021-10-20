@@ -1,4 +1,13 @@
 class CardGame extends Phaser.GameObjects.Container {
+  static ruleMap =
+    {
+      QuestionOnly1,
+      QuestionOnly2,
+      QuestionOnly2Simple,
+      QuestionOnly2Double,
+      QuestionOnly2Nothing,
+      QuestionOnly2Stop,
+    }
   constructor(
     parent,
     x = 0,
@@ -9,7 +18,7 @@ class CardGame extends Phaser.GameObjects.Container {
     backIndex,
     eventName,
     items,
-    ruleIndex
+    typeIndex
   ) {
     super(parent, x, y);
 
@@ -23,31 +32,32 @@ class CardGame extends Phaser.GameObjects.Container {
     
     const lastIndex = maxCards;
 
-    items = this.suffleCards(items);
+    items = CardGame.suffle(clone(items));
 
     while (count < lastIndex) {
       let i = count % maxWidth;
       let j = Math.floor(count / maxWidth);
 
       let card = null;
-      eval("card = new "+cardRules[ruleIndex].rules[ruleIndex]+"("+
-        "parent,"+
-        "50 + 120 * j * scale,"+
-        "50 + 162 * i * scale,"+
-        "imageName,"+
-        "frontIndex,"+
-        "backIndex,"+
-        "scale,"+
-        "eventName,"+
-        "items[count%items.length]"+
-      ");");
+
+      card = new CardGame.ruleMap[json[typeIndex].rule](
+        parent,
+        50 + 120 * j * scale,
+        50 + 162 * i * scale,
+        imageName,
+        frontIndex,
+        backIndex,
+        scale,
+        eventName,
+        items[count%items.length]
+      );
       this.cards.push(card);
       count++;
     }
 
     parent.add.existing(this);
   }
-  suffleCards(items) {
+  static suffle(items) {
     let newOrder = [];
     let i = 0;
     while (items.length > 0) {

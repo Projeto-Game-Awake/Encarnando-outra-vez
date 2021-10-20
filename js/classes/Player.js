@@ -10,10 +10,12 @@ class Player extends Phaser.GameObjects.Container {
 
     super(parent, x, y, [sprite]);
 
+    this.index = index % 5;
     this.parent = parent;
     this.x = x;
     this.y = y - gameOptions.tileHeightHalf * 2;
-
+    this.points = 0;
+    
     this.pos = -1;
 
     sprite.setScale(2, 2);

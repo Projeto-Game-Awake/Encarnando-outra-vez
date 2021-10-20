@@ -8,6 +8,7 @@ class question extends Phaser.Scene {
   }
   init(data) {
     this.player = data.player;
+    this.type = 1;
   }
   create() {
     const event = "question_ended";
@@ -25,12 +26,12 @@ class question extends Phaser.Scene {
       0,
       event,
       this.items,
-      0
+      this.type
     );
 
     const scene = this;
     eventManager.subscribe(event, (data) => {
-      const result = data.result;
+      const result = data.point;
       scene.selectCard(result);
     });
   }

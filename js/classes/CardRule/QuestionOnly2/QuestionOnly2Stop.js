@@ -1,4 +1,4 @@
-class CardOnly1 extends CardRule {
+class QuestionOnly2Stop extends QuestionOnly1 {
   constructor(
     parent,
     x,

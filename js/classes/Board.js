@@ -26,10 +26,11 @@ class Board extends Phaser.GameObjects.Container {
     this.currentPlayerIndex = 0;
 
     const board = this;
-    eventManager.subscribe("right_answer", (data) => {});
-
-    eventManager.subscribe("wrong_answer", (data) => {
-      board.nextPlayer();
+    eventManager.subscribe("answer", (data) => {
+      this.players[this.currentPlayerIndex].points += data.point;
+      if(data.point < 1) {
+        board.nextPlayer();
+      }
     });
 
     eventManager.subscribe("player_dead", (data) => {
@@ -115,10 +116,14 @@ class Board extends Phaser.GameObjects.Container {
     return Phaser.Math.Between(0, 3);
   }
   getTileType(player) {
-    return this.path[player.pos + 1].type;
+    //return this.path[player.pos + 1].type;
+    return 0;
   }
   getCurrentPlayer() {
     return this.players[this.currentPlayerIndex];
+  }
+  getPlayers() {
+    return this.players;
   }
   nextPlayer() {
     this.currentPlayerIndex++;

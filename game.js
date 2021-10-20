@@ -1,5 +1,5 @@
 var width = screen.width;
-var height = screen.height;
+var height = screen.height * (isMobile() ? 2 : 1);
 var scene;
 
 var gameOptions = {
@@ -10,7 +10,7 @@ var gameOptions = {
 
 var eventManager = new EventManager();
 var coordinate = new Coordinate();
-var cardRules = [];
+var json = null;
 
 window.onload = function () {
   let gameConfig = {
@@ -25,7 +25,7 @@ window.onload = function () {
     dom: {
       createContainer: true,
     },
-    scene: [start, gameplay, question, choice, mini_game, all_in_one, death],
+    scene: [start, gameplay, question, choice, mini_game, all_in_one, death, result],
   };
   game = new Phaser.Game(gameConfig);
   window.focus();
@@ -33,3 +33,12 @@ window.onload = function () {
 
 let url = new URL(window.location.href);
 const jogo = url.searchParams.get("jogo");
+
+function clone(obj) {
+  if (null == obj || "object" != typeof obj) return obj;
+  var copy = obj.constructor();
+  for (var attr in obj) {
+      if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+  }
+  return copy;
+}
