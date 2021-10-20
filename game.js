@@ -12,9 +12,10 @@ var eventManager = new EventManager();
 var coordinate = new Coordinate();
 var json = null;
 
-window.onload = function () {
+window.onload = function () {   
   let gameConfig = {
     type: Phaser.AUTO,
+    scaleMode: Phaser.Scale.ScaleModes.FIT,
     scale: {
       autoCenter: Phaser.Scale.CENTER_BOTH,
       parent: "Encarnado-outra-vez",
@@ -26,9 +27,6 @@ window.onload = function () {
     },
     scene: [start, gameplay, question, choice, mini_game, all_in_one, death, result],
   };
-  if(!isMobile()) {
-    gameConfig.scaleMode = Phaser.Scale.ScaleModes.FIT;
-  }
   game = new Phaser.Game(gameConfig);
   game.scale.resize(width, height);
   window.focus();
