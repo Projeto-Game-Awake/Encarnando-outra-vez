@@ -1,5 +1,5 @@
 var width = screen.width;
-var height = screen.height * (isMobile() ? 2 : 1);
+var height = screen.height;
 var scene;
 
 var gameOptions = {
