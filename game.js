@@ -18,7 +18,7 @@ window.onload = function () {
     scaleMode: Phaser.Scale.ScaleModes.FIT,
     scale: {
       autoCenter: Phaser.Scale.CENTER_BOTH,
-      parent: "Memorizando-e-aprendendo",
+      parent: "Encarnado-outra-vez",
       width: width,
       height: height,
     },
