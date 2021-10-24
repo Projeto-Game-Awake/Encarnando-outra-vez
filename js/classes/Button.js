@@ -6,30 +6,30 @@ class Button extends Phaser.GameObjects.Container {
       align: "left",
       color: "#000000",
       backgroundColor: "#cccccc",
-      wordWrap: { width: 400, useAdvancedWrap: true },
+      wordWrap: { width: 200, useAdvancedWrap: true },
     };
 
-    let buttonText = scene.add.text(0, 0, label, style);
-    buttonText.setOrigin(0.5, 0);
+    let text = scene.add.text(0, 0, label, style);
+    text.setOrigin(0, 0);
 
-    super(parent, x, y, [buttonText]);
+    super(parent, x, y, [text]);
 
-    this.buttonText = buttonText;
+    this.buttonText = text;
 
     //this.setSize(buttonText.width,buttonText.height);
 
     //buttonText.setInteractive();
     this.setInteractive(
-      new Phaser.Geom.Rectangle(0, 0, buttonText.width,buttonText.height),
+      new Phaser.Geom.Rectangle(0, 0, text.width,text.height),
       Phaser.Geom.Rectangle.Contains
     );
 
     this.on("pointerover", function () {
-      buttonText.setTint(0x44ff44);
+      text.setTint(0x44ff44);
     });
 
     this.on("pointerout", function () {
-      buttonText.clearTint();
+      text.clearTint();
     });
 
     this.once("pointerdown", function () {

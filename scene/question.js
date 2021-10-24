@@ -11,7 +11,10 @@ class question extends Phaser.Scene {
     this.type = 1;
   }
   create() {
+    this.scale.mode = Phaser.Scale.NONE;
     const event = "question_ended";
+
+    this.isSelected = false;
 
     let json = this.cache.json.get("jogo");
     this.items = this.getItems(json);
@@ -29,10 +32,9 @@ class question extends Phaser.Scene {
       this.type
     );
 
-    const scene = this;
     eventManager.subscribe(event, (data) => {
       const result = data.point;
-      scene.selectCard(result);
+      this.selectCard(result);
     });
   }
   getItems(json) {

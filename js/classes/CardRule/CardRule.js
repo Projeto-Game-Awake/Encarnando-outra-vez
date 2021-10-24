@@ -26,19 +26,38 @@ class CardRule extends Phaser.GameObjects.Container {
         backIndex
       );
   
-      let xPos = x + (scale * frontImage.width) / 2;
-      let yPos = y + 20;
       let style = {
-        fontSize: isMobile() ? 20 : 10,
+        fontSize: 10,
         fontFamily: "Arial",
         align: "left",
         color: "#000000",
-        wordWrap: { width: 400, useAdvancedWrap: true },
+        wordWrap: { width: 100, useAdvancedWrap: true },
       };
-
-      let question = scene.add.text(10, 20, item.question, style);
+      
+      item.question = "Umas das seitas que existiam na época do nascimento de Jesus. Eram, em grande parte, os mais ricos e orgulhosos e posteriormente foram os maiores alvos das advertências de Jesus.";
+      let question = parent.add.text(10, 30, item.question, style).setOrigin(0);
       question.visible = false;
+  
+      let graphics = parent.make.graphics();
 
+      // graphics.fillStyle(0xffffff);
+      graphics.fillRect(10, 40, 220, 144);
+
+      let mask = new Phaser.Display.Masks.GeometryMask(parent, graphics);
+
+      //  The rectangle they can 'drag' within
+      let zone = parent.add.zone(10, 40, 220, 144).setOrigin(0).setInteractive();
+
+      zone.on('pointermove', function (pointer) {
+        if (pointer.isDown)
+        {
+          question.y += (pointer.velocity.y / 10);
+          //question.y = Phaser.Math.Clamp(question.y, 0, question.height);
+        }
+
+      });
+
+      zone.alpha = 0;
       let startY = 100;
 
       let answers = [];
@@ -46,7 +65,7 @@ class CardRule extends Phaser.GameObjects.Container {
       for(let i=0;i<item.answers.length;i++) {
         let answer = new Button(
           parent,
-          25,
+          10,
           startY,
           (i+1) + " - " + item.answers[i].text,
           function () {
@@ -65,14 +84,17 @@ class CardRule extends Phaser.GameObjects.Container {
       let elements = [
         frontImage,
         backImage,
-        question
+        question,
+        zone
       ]
       for(let i=0;i<answers.length;i++) {
         elements.push(answers[i]);
       }
 
       super(parent, x, y, elements);
-  
+
+      question.setMask(mask);
+      
       frontImage.setScale(scale, scale);
   
       frontImage.setOrigin(0, 0);
@@ -109,6 +131,10 @@ class CardRule extends Phaser.GameObjects.Container {
     }
   
     showFace() {
+      if(this.parent.isSelected) {
+        return;
+      }
+      this.parent.isSelected = true;
       this.backImage.destroy();
   
       this.frontImage.visible = true;
@@ -117,12 +143,8 @@ class CardRule extends Phaser.GameObjects.Container {
       for(let i=0;i<this.answers.length;i++) {
         this.answers[i].visible = true;
       }
-  
-      if(isMobile()) {
-        this.setScale(10,10);
-      } else {
-        this.setScale(5,5);
-      }
+
+      this.setScale(2,2);
 
       this.x = 10;
       this.y = 10;

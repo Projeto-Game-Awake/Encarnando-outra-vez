@@ -1,0 +1,136 @@
+[
+    {
+      "mini_game": [
+        {
+          
+        }
+      ],
+      "rule": [
+        "QuestionOnly1"
+      ]
+    },
+    {
+      "question": [
+        {
+            "question": "Viviam nas montanhas e são considerados os precursores do cristianismo:",
+            "answers":[
+                {"text":"essênios","point":1 },
+                {"text":"fariseus","point":-1},
+                {"text":"publicanos","point":-1},
+                {"text":"profetas","point":-1}
+            ]
+        },
+        {
+            "question": "Seu nome era ___________ Batista e foi uma figura muito marcante na vida de Jesus",
+            "answers":[
+                {"text":"José","point":-1},
+                {"text":"João","point":1},
+                {"text":"Tiago","point":-1},
+                {"text":"Judas","point":-1}
+            ]
+        },
+        {
+            "question": "Qual é o nome da mãe de Jesus?",
+            "answers":[
+                {"text":"Sofia","point":-1},
+                {"text":"Maria de Nazaré","point":1},
+                {"text":"Joana","point":-1},
+                {"text":"Maria de Magdala","point":-1}
+            ]
+        },
+        {
+            "question": "Jesus nasceu em qual cidade?",
+            "answers":[
+                {"text":"Nazaré","point":-1},
+                {"text":"Belém","point":1},
+                {"text":"Jerusalém","point":-1},
+                {"text":"Carfanaum","point":-1}
+            ]
+        },
+        {
+            "question": "Jesus era o ____________ prometido ao povo judeu. Aquele que seria enviado por Deus para governar o reino de Israel",
+            "answers":[
+                {"text":"profeta","point":-1},
+                {"text":"herói","point":-1},
+                {"text":"guerreiro","point":-1},
+                {"text":"messias","point":1}
+            ]
+        },
+        {
+            "question": "Como se chama o ritual onde foi jogado na cabeça de Jesus águas do Rio Jordão?",
+            "answers":[
+                {"text":"escalda pé","point":-1},
+                {"text":"banho da glória","point":-1},
+                {"text":"unção","point":-1},
+                {"text":"batismo","point":1}
+            ]
+        },
+        {
+            "question": "Umas das seitas que existiam na época do nascimento de Jesus. Eram, em grande parte, os mais ricos e orgulhosos e posteriormente foram os maiores alvos das advertências de Jesus.",
+            "answers":[
+                {"text":"essênios","point":-1 },
+                {"text":"fariseus","point":1},
+                {"text":"publicanos","point":-1},
+                {"text":"profetas","point":-1}
+            ]
+        },
+        {
+            "question": "Na época, os templos ___________ acabava servindo de grande mercado para os religiosos.",
+            "answers":[
+                {"text":"dos essênios","point":-1 },
+                {"text":"judaicos","point":1},
+                {"text":"publicanos","point":-1},
+                {"text":"de Jerusalém","point":-1}
+            ]
+        },
+        {
+            "question": "Devido também ao rei da época, _____________, o Grande, o pai de Jesus teve que levar Maria para ter seu filho em outra cidade.",
+            "answers":[
+                {"text":"Alexandre","point":-1 },
+                {"text":"Herodes","point":1},
+                {"text":"Pilátos","point":-1},
+                {"text":"Augusto César","point":-1}
+            ]
+        },
+        {
+            "question": "Apesar de ter nascido em outra cidade, Jesus viveu a maior parte de sua vida em _____________.",
+            "answers":[
+                {"text":"Nazaré","point":1},
+                {"text":"Belém","point":-1},
+                {"text":"Jerusalém","point":-1},
+                {"text":"Roma","point":-1}
+            ]
+        },
+        {
+            "question": "Qual era o nome do pai de Jesus?",
+            "answers":[
+                {"text":"José","point":1},
+                {"text":"João","point":-1},
+                {"text":"Jesus","point":-1},
+                {"text":"Judas","point":-1}
+            ]
+        }
+      ],
+      "rule": [
+        "QuestionOnly1"
+      ]
+    },
+    {
+      "choice": [
+        
+      ],
+      "rule": [
+        "QuestionOnly1"
+      ]
+    },
+    {
+      "all-in-one": [
+        
+      ],
+      "rule": [
+        "QuestionOnly1"
+      ]
+    }
+  ]
+  
+  
