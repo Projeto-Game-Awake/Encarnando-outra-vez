@@ -43,7 +43,7 @@ class start extends Phaser.Scene {
     });
     this.tweens.add({
       targets: element,
-      y: 400,
+      y: height/2,
       duration: 500,
       ease: "Power3",
     });

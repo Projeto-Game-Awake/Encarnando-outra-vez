@@ -1,5 +1,5 @@
-var width = screen.width;
-var height = screen.height;
+var width = window.innerWidth * window.devicePixelRatio;
+var height = window.innerHeight * window.devicePixelRatio;
 var scene;
 
 var gameOptions = {
