@@ -18,8 +18,6 @@ class Player extends Phaser.GameObjects.Container {
     
     this.pos = -1;
 
-    sprite.setScale(2, 2);
-
     sprite.setOrigin(0.5, 0.5);
     this.sprite = sprite;
     this.death = Phaser.Math.Between(20, 120);

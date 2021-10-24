@@ -34,7 +34,6 @@ class CardRule extends Phaser.GameObjects.Container {
         wordWrap: { width: 100, useAdvancedWrap: true },
       };
       
-      item.question = "Umas das seitas que existiam na época do nascimento de Jesus. Eram, em grande parte, os mais ricos e orgulhosos e posteriormente foram os maiores alvos das advertências de Jesus.";
       let question = parent.add.text(10, 30, item.question, style).setOrigin(0);
       question.visible = false;
   
@@ -52,7 +51,9 @@ class CardRule extends Phaser.GameObjects.Container {
         if (pointer.isDown)
         {
           question.y += (pointer.velocity.y / 10);
-          //question.y = Phaser.Math.Clamp(question.y, 0, question.height);
+          if(question.y < 30) {
+            question.y = 30;
+          }
         }
 
       });
