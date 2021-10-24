@@ -36,29 +36,7 @@ class CardRule extends Phaser.GameObjects.Container {
       
       let question = parent.add.text(10, 30, item.question, style).setOrigin(0);
       question.visible = false;
-  
-      let graphics = parent.make.graphics();
 
-      // graphics.fillStyle(0xffffff);
-      graphics.fillRect(10, 40, 220, 144);
-
-      let mask = new Phaser.Display.Masks.GeometryMask(parent, graphics);
-
-      //  The rectangle they can 'drag' within
-      let zone = parent.add.zone(10, 40, 220, 144).setOrigin(0).setInteractive();
-
-      zone.on('pointermove', function (pointer) {
-        if (pointer.isDown)
-        {
-          question.y += (pointer.velocity.y / 10);
-          if(question.y < 30) {
-            question.y = 30;
-          }
-        }
-
-      });
-
-      zone.alpha = 0;
       let startY = 100;
 
       let answers = [];
@@ -85,16 +63,13 @@ class CardRule extends Phaser.GameObjects.Container {
       let elements = [
         frontImage,
         backImage,
-        question,
-        zone
+        question
       ]
       for(let i=0;i<answers.length;i++) {
         elements.push(answers[i]);
       }
 
       super(parent, x, y, elements);
-
-      question.setMask(mask);
       
       frontImage.setScale(scale, scale);
   
@@ -144,6 +119,29 @@ class CardRule extends Phaser.GameObjects.Container {
       for(let i=0;i<this.answers.length;i++) {
         this.answers[i].visible = true;
       }
+
+      let graphics = this.parent.make.graphics();
+
+      // graphics.fillStyle(0xffffff);
+      graphics.fillRect(10, 40, 220, 144);
+
+      let mask = new Phaser.Display.Masks.GeometryMask(this.parent, graphics);
+
+      //  The rectangle they can 'drag' within
+      let zone = this.parent.add.zone(10, 40, 220, 144).setOrigin(0).setInteractive();
+
+      zone.on('pointermove', (pointer) => {
+        if (pointer.isDown)
+        {
+          this.question.y += (pointer.velocity.y / 10);
+          if(this.question.y < 30) {
+            this.question.y = 30;
+          }
+        }
+
+      });
+      this.add(zone);
+      this.question.setMask(mask);
 
       this.setScale(2,2);
 

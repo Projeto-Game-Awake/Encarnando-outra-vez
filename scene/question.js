@@ -17,7 +17,7 @@ class question extends Phaser.Scene {
     this.isSelected = false;
 
     let json = this.cache.json.get("jogo");
-    this.items = this.getItems(json);
+    this.items = this.getItems(json).actions;
 
     this.cardGame = new CardGame(
       this,
@@ -38,7 +38,10 @@ class question extends Phaser.Scene {
     });
   }
   getItems(json) {
-    return json[1].question;
+    return json.question;
+  }
+  getName() {
+    return "question";
   }
   selectCard(result) {
     this.scene.resume("main");

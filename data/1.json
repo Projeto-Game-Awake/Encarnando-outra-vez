@@ -1,131 +1,59 @@
-[
-  {
-    "mini_game": [
-      {
-        "question": "quanto é 1 + 1",
-        "answers":[
-          {
-            "text":"2",
-            "point":1
-          },
-          {
-            "text":"3",
-            "point":-1
-          },
-          {
-            "text":"4",
-            "point":-1
-          },
-          {
-            "text":"1",
-            "point":-1
-          },
-          {
-            "text":"0",
-            "point":-1
-          }
-        ]
-      }
-    ],
-    "rule": [
-      "QuestionOnly1"
-    ]
-  },
-  {
-    "question": [
-      {
-        "question": "quanto é 1 + 1",
-        "answers":[
-          {
-            "text":"2",
-            "point":1
-          },
-          {
-            "text":"3",
-            "point":-1
-          },
-          {
-            "text":"4",
-            "point":-1
-          },
-          {
-            "text":"1",
-            "point":-1
-          },
-          {
-            "text":"0",
-            "point":-1
-          }
-        ]
-      }
-    ],
-    "rule": [
-      "QuestionOnly1"
-    ]
-  },
-  {
-    "choice": [
-      {
-        "question": "quanto é 1 + 1",
-        "answers":[
-          {
-            "text":"2",
-            "point":1
-          },
-          {
-            "text":"3",
-            "point":-1
-          },
-          {
-            "text":"4",
-            "point":-1
-          },
-          {
-            "text":"1",
-            "point":-1
-          },
-          {
-            "text":"0",
-            "point":-1
-          }
-        ]
-      }
-    ],
-    "rule": [
-      "QuestionOnly1"
-    ]
-  },
-  {
-    "all-in-one": [
-      {
-        "question": "quanto é 1 + 1",
-        "answers":[
-          {
-            "text":"2",
-            "point":1
-          },
-          {
-            "text":"3",
-            "point":-1
-          },
-          {
-            "text":"4",
-            "point":-1
-          },
-          {
-            "text":"1",
-            "point":-1
-          },
-          {
-            "text":"0",
-            "point":-1
-          }
-        ]
-      }
-    ],
-    "rule": [
-      "QuestionOnly1"
-    ]
-  }
-]
-
+{
+  "mini_game": {
+    "actions": [
+    {
+      
+    }
+  ],
+  "rule": [
+    "QuestionOnly1"
+  ]
+},
+"question": { 
+"actions": [
+    {
+      "question": "quanto é 1 + 1",
+      "answers":[
+        {
+          "text":"2",
+          "point":1
+        },
+        {
+          "text":"3",
+          "point":-1
+        },
+        {
+          "text":"4",
+          "point":-1
+        },
+        {
+          "text":"1",
+          "point":-1
+        },
+        {
+          "text":"0",
+          "point":-1
+        }
+      ]
+    }
+  ],
+  "rule": [
+    "QuestionOnly1"
+  ]
+},
+  "choice": {
+  "actions": [
+    
+  ],
+  "rule": [
+    "QuestionOnly1"
+  ]
+},
+  "all-in-one": {
+      "actions": [
+  ],
+  "rule": [
+    "QuestionOnly1"
+  ]
+}
+}

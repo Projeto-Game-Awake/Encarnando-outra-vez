@@ -7,6 +7,6 @@ class mini_game extends question {
     this.type = 0;
   }
   getItems(json) {
-    return json[0].mini_game;
+    return json.mini_game;
   }
 }

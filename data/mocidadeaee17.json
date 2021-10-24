@@ -1,6 +1,6 @@
-[
-    {
-      "mini_game": [
+{
+      "mini_game": {
+        "actions": [
         {
           
         }
@@ -9,8 +9,8 @@
         "QuestionOnly1"
       ]
     },
-    {
-      "question": [
+    "question": { 
+    "actions": [
         {
             "question": "Viviam nas montanhas e são considerados os precursores do cristianismo:",
             "answers":[
@@ -115,22 +115,22 @@
         "QuestionOnly1"
       ]
     },
-    {
-      "choice": [
+      "choice": {
+      "actions": [
         
       ],
       "rule": [
         "QuestionOnly1"
       ]
     },
-    {
-      "all-in-one": [
-        
+      "all-in-one": {
+          "actions": [
       ],
       "rule": [
         "QuestionOnly1"
       ]
     }
-  ]
+}
+
   
   

@@ -106,9 +106,14 @@ class Player extends Phaser.GameObjects.Container {
             player: player,
           });
         } else {
-          scene.scene.run(scene.tileScene[scene.board.getTileType(player)], {
-            player: player,
-          });
+          let sceneName = scene.tileScene[scene.board.getTileType(player)];
+          if(scene.scene.isActive(sceneName)) {
+            scene.scene.restart();
+          } else {
+            scene.scene.run(sceneName, {
+              player: player,
+            }); 
+          }
         }
       },
     });

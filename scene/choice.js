@@ -7,6 +7,6 @@ class choice extends question {
     this.type = 2;
   }
   getItems(json) {   
-    return json[2].choice;
+    return json.choice;
   }
 }

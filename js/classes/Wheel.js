@@ -14,11 +14,6 @@ class Wheel {
     // adding the pin in the middle of the canvas
     this.pin = parent.add.sprite(x, y, "pin");
 
-    if(isMobile()) {
-      this.wheel.setScale(0.5);
-      this.pin.setScale(0.5);
-    }
-
     // adding the text field
     this.prizeText = parent.add.text(x, y + 60, "", {
         font: "bold 32px Arial",
