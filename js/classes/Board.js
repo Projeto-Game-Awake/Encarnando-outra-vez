@@ -5,7 +5,7 @@ class Board extends Phaser.GameObjects.Container {
       obj = {};
     }
 
-    super(parent, 600, 600, []);
+    super(parent, width, height, []);
     this.rows = obj.rows != undefined ? obj.rows : 5;
     this.columns = obj.columns != undefined ? obj.columns : 2;
     this.items = obj.items != undefined ? obj.items : [0, 1, 2, 3, 4];

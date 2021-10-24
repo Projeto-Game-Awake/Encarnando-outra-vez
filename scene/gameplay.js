@@ -46,14 +46,10 @@ class gameplay extends Phaser.Scene {
       y: 1,
     });
 
-    if(isMobile()) {
-      this.well = new Wheel(scene, 1200, 1100);
-    } else {
-      this.well = new Wheel(scene, 1300, 300);
-    }
+    this.well = new Wheel(scene, 1000, 300);
 
-    this.endButton = this.add.text(50,50,"Encerrar", {
-      fontSize: 80,
+    this.endButton = this.add.text(20,20,"Encerrar", {
+      fontSize: 60,
       backgroundColor: "#00ff00"
     });
     this.endButton.setInteractive();
@@ -96,12 +92,17 @@ class gameplay extends Phaser.Scene {
     this.board.addLine(4, Direction.DOWN);
     this.board.addLine(6, Direction.RIGHT);
     this.board.addLine(3, Direction.DOWN);
-    this.board.addLine(5, Direction.RIGHT);
+    this.board.addLine(3, Direction.LEFT);
+    this.board.addLine(4, Direction.DOWN);
+    this.board.addLine(2, Direction.LEFT);
+    this.board.addLine(2, Direction.DOWN);
+    this.board.addLine(8, Direction.RIGHT);
+    this.board.addLine(11, Direction.UP);
+    this.board.addLine(2, Direction.RIGHT);
     this.board.addLine(5, Direction.DOWN);
-    this.board.addLine(3, Direction.RIGHT);
-    this.board.addLine(8, Direction.UP);
-    this.board.addLine(4, Direction.LEFT);
-    this.board.addLine(4, Direction.UP);
+    this.board.addLine(1, Direction.RIGHT);
+    this.board.addLine(5, Direction.DOWN);
+    this.board.addLine(2, Direction.RIGHT);
 
     this.board.drawBoard();
 

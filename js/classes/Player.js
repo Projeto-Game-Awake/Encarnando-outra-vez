@@ -49,8 +49,8 @@ class Player extends Phaser.GameObjects.Container {
   }
   getInitialPosition() {
     const zeroPos = {
-      x: 600,
-      y: 52,
+      x: coordinate.initX,
+      y: coordinate.initY,
     };
 
     const deltaY = this.convertPosition(0, 1);

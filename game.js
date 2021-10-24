@@ -3,9 +3,8 @@ var height = window.innerHeight * window.devicePixelRatio;
 var scene;
 
 var gameOptions = {
-  tileSize: 32,
-  tileWidthHalf: 40,
-  tileHeightHalf: 24,
+  tileWidthHalf: 25,
+  tileHeightHalf: 15,
 };
 
 var eventManager = new EventManager();
@@ -15,8 +14,9 @@ var json = null;
 window.onload = function () {   
   let gameConfig = {
     type: Phaser.AUTO,
-    scaleMode: Phaser.Scale.ScaleModes.FIT,
+    autoResize: true,
     scale: {
+      mode: Phaser.Scale.FIT,
       autoCenter: Phaser.Scale.CENTER_BOTH,
       parent: "Encarnado-outra-vez",
       width: width,

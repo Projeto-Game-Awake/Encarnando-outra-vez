@@ -14,10 +14,10 @@
         {
             "question": "Viviam nas montanhas e são considerados os precursores do cristianismo:",
             "answers":[
-                {"text":"essênios","point":1 },
-                {"text":"fariseus","point":-1},
-                {"text":"publicanos","point":-1},
-                {"text":"profetas","point":-1}
+                {"text":"Essênios","point":1 },
+                {"text":"Fariseus","point":-1},
+                {"text":"Publicanos","point":-1},
+                {"text":"Profetas","point":-1}
             ]
         },
         {
@@ -50,37 +50,37 @@
         {
             "question": "Jesus era o ____________ prometido ao povo judeu. Aquele que seria enviado por Deus para governar o reino de Israel",
             "answers":[
-                {"text":"profeta","point":-1},
-                {"text":"herói","point":-1},
-                {"text":"guerreiro","point":-1},
-                {"text":"messias","point":1}
+                {"text":"Profeta","point":-1},
+                {"text":"Herói","point":-1},
+                {"text":"Guerreiro","point":-1},
+                {"text":"Messias","point":1}
             ]
         },
         {
             "question": "Como se chama o ritual onde foi jogado na cabeça de Jesus águas do Rio Jordão?",
             "answers":[
-                {"text":"escalda pé","point":-1},
-                {"text":"banho da glória","point":-1},
-                {"text":"unção","point":-1},
-                {"text":"batismo","point":1}
+                {"text":"Escalda-pés","point":-1},
+                {"text":"Banho da glória","point":-1},
+                {"text":"Unção","point":-1},
+                {"text":"Batismo","point":1}
             ]
         },
         {
             "question": "Umas das seitas que existiam na época do nascimento de Jesus. Eram, em grande parte, os mais ricos e orgulhosos e posteriormente foram os maiores alvos das advertências de Jesus.",
             "answers":[
-                {"text":"essênios","point":-1 },
-                {"text":"fariseus","point":1},
-                {"text":"publicanos","point":-1},
-                {"text":"profetas","point":-1}
+                {"text":"Essênios","point":-1 },
+                {"text":"Fariseus","point":1},
+                {"text":"Publicanos","point":-1},
+                {"text":"Profetas","point":-1}
             ]
         },
         {
             "question": "Na época, os templos ___________ acabava servindo de grande mercado para os religiosos.",
             "answers":[
-                {"text":"dos essênios","point":-1 },
-                {"text":"judaicos","point":1},
-                {"text":"publicanos","point":-1},
-                {"text":"de Jerusalém","point":-1}
+                {"text":"Dos essênios","point":-1 },
+                {"text":"Judaicos","point":1},
+                {"text":"Publicanos","point":-1},
+                {"text":"De Jerusalém","point":-1}
             ]
         },
         {

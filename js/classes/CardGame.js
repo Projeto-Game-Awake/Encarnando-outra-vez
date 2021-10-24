@@ -42,8 +42,8 @@ class CardGame extends Phaser.GameObjects.Container {
 
       card = new CardGame.ruleMap[json[typeIndex].rule](
         parent,
-        (width/2) + 120 * j * scale,
-        50 + 162 * i * scale,
+        400 + 120 * j * scale,
+        162 * i * scale,
         imageName,
         frontIndex,
         backIndex,
