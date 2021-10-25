@@ -107,7 +107,7 @@ class Player extends Phaser.GameObjects.Container {
           });
         } else {
           let sceneName = scene.tileScene[scene.board.getTileType(player)];
-          if(scene.scene.isActive(sceneName)) {
+          if(scene.scene.isSleeping(sceneName)) {
             scene.scene.restart();
           } else {
             scene.scene.run(sceneName, {

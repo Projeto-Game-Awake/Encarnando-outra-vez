@@ -110,15 +110,13 @@ class CardRule extends Phaser.GameObjects.Container {
       if(this.parent.isSelected) {
         return;
       }
+      this.setScale(2,2);
+
       this.parent.isSelected = true;
       this.backImage.destroy();
   
       this.frontImage.visible = true;
       this.question.visible = true;
-  
-      for(let i=0;i<this.answers.length;i++) {
-        this.answers[i].visible = true;
-      }
 
       let graphics = this.parent.make.graphics();
 
@@ -128,13 +126,13 @@ class CardRule extends Phaser.GameObjects.Container {
       let mask = new Phaser.Display.Masks.GeometryMask(this.parent, graphics);
 
       //  The rectangle they can 'drag' within
-      let zone = this.parent.add.zone(10, 40, 220, 144).setOrigin(0).setInteractive();
+      let zone = this.parent.add.zone(10, 40, 220, 50).setOrigin(0).setInteractive();
 
       zone.on('pointermove', (pointer) => {
         if (pointer.isDown)
         {
           this.question.y += (pointer.velocity.y / 10);
-          if(this.question.y < 30) {
+          if(this.question.y > 30) {
             this.question.y = 30;
           }
         }
@@ -143,7 +141,10 @@ class CardRule extends Phaser.GameObjects.Container {
       this.add(zone);
       this.question.setMask(mask);
 
-      this.setScale(2,2);
+      for(let i=0;i<this.answers.length;i++) {
+        this.answers[i].visible = true;
+        this.parent.children.bringToTop(this.answers[i]);
+      }
 
       this.x = 10;
       this.y = 10;
