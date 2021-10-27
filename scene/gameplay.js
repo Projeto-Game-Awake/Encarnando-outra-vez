@@ -33,20 +33,18 @@ class gameplay extends Phaser.Scene {
     this.objects = {};
   }
   create() {
-    scene = this;
-
     json = this.cache.json.get("jogo");
 
     var frames = this.textures.get("isoblocks").getFrameNames();
 
     this.tileScene = ["question", "choice", "mini-game", "all-in-one"];
-    this.board = new Board(scene, {
+    this.board = new Board(this, {
       items: [0, 1, 2, 3, 4],
       x: 0,
       y: 1,
     });
 
-    this.well = new Wheel(scene, 1000, 300);
+    this.well = new Wheel(this, 1000, 300);
 
     this.endButton = this.add.text(20,20,"Encerrar", {
       fontSize: 60,
@@ -78,10 +76,12 @@ class gameplay extends Phaser.Scene {
     let value = data.distance;
     let player = this.board.getCurrentPlayer();
 
-    player.age += value;
-    if (player.age > player.death) {
-      value -= player.age - player.death;
-      player.age = player.death;
+    if(hasDeath) {
+      player.age += value;
+      if (player.age > player.death) {
+        value -= player.age - player.death;
+        player.age = player.death;
+      }
     }
 
     player.doPath(value);
@@ -107,7 +107,7 @@ class gameplay extends Phaser.Scene {
     this.board.drawBoard();
 
     for (let i = 0; i < gameOptions.players; i++) {
-      scene.children.bringToTop(scene.board.players[i]);
+      this.children.bringToTop(this.board.players[i]);
     }
   }
 }

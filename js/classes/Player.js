@@ -60,7 +60,7 @@ class Player extends Phaser.GameObjects.Container {
   }
 
   doPath(distance) {
-    let path = scene.board.path;
+    let path = this.parent.board.path;
     let player = this;
 
     let timeLine = this.parent.tweens.createTimeline();
@@ -84,7 +84,7 @@ class Player extends Phaser.GameObjects.Container {
 
     while (current < distance) {
       let direction = path[++this.pos].direction;
-      let deltaMove = scene.board.direction[direction];
+      let deltaMove = this.parent.board.direction[direction];
 
       let move = this.convertPosition(deltaMove.x, deltaMove.y);
 
@@ -99,18 +99,18 @@ class Player extends Phaser.GameObjects.Container {
       targets: player,
       duration: 300,
       callbackScope: this,
-      callback: function () {
-        scene.scene.pause();
-        if (player.death == player.age) {
-          scene.scene.run("death", {
+      callback: () => {
+        this.parent.scene.pause();
+        if (hasDeath && player.death == player.age) {
+          this.parent.scene.run("death", {
             player: player,
           });
         } else {
-          let sceneName = scene.tileScene[scene.board.getTileType(player)];
-          if(scene.scene.isSleeping(sceneName)) {
-            scene.scene.restart();
+          let sceneName = this.parent.tileScene[this.parent.board.getTileType(player)];
+          if(this.parent.scene.isSleeping(sceneName)) {
+            this.parent.scene.restart();
           } else {
-            scene.scene.run(sceneName, {
+            this.parent.scene.run(sceneName, {
               player: player,
             }); 
           }

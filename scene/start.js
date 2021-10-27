@@ -8,9 +8,25 @@ class start extends Phaser.Scene {
     this.objects = {};
   }
   create() {
-    scene = this;
+    let scene = this;
+
+    let json = GameAwakeUtils.loadConfig(this,jogo);
+    if(json == null) {
+      return;
+    }
 
     let element = this.add.dom(width / 2, 0).createFromCache("start");
+    
+
+    let types = ["mini_game","question","choice","all_in_one"];
+    let total = 0;
+    for(let i=0;i<types.length;i++) {
+      if(json[types[i]]) {
+        total += json[types[i]].actions.length;
+      }
+    }
+
+    element.getChildByID("total").innerHTML = total;
 
     element.addListener("click");
 

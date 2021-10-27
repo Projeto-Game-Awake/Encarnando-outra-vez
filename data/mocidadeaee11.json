@@ -1,0 +1,310 @@
+{
+      "mini_game": {
+        "actions": [
+        {
+          
+        }
+      ],
+      "rule": [
+        "QuestionOnly1"
+      ]
+    },
+    "question": { 
+    "actions": [
+        {
+            "question": "Deus é a inteligência suprema, causa primária de todas as coisas",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        },
+        {
+            "question": "Deus é a inteligência suprema, causa primária de quase todas as coisas",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "Deus é uma inteligência relativa, causa primária de todas as coisas",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "Deus é, pois, a suprema e soberana inteligência; é único, eterno, imutável, imaterial, onipotente, soberanamente justo e bom, infinito em todas as suas perfeições, e não pode deixar de ser assim",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        },
+        {
+            "question": "Deus é, pois, a suprema e soberana inteligência; não é único mas é eterno, imutável, imaterial, onipotente, soberanamente justo e bom, infinito em todas as suas perfeições, e não pode deixar de ser assim",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "Deus é, pois, a suprema e soberana inteligência; é único, eterno, mutável, imaterial, onipotente, soberanamente justo e bom, infinito em todas as suas perfeições, e não pode deixar de ser assim",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "Deus é, pois, a suprema e soberana inteligência; é único, eterno, imutável, imaterial, onipotente, soberanamente justo e bom, não é infinito em todas as suas perfeições, e não pode deixar de ser assim",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "Deus é, pois, a suprema e soberana inteligência; é único, eterno, imutável, imaterial, onipotente, soberanamente justo e bom, infinito em todas as suas perfeições, mas pode deixar de ser assim",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "Deus possui todas as perfeições e todos os atributos em grau supremo. Se ao menos um desses atributos não fosse o maior e, portanto Ele não fosse superior em tudo, Ele não seria Deus.",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        },
+        {
+            "question": "Deus possui todas as perfeições e todos os atributos em grau supremo. Se alguns desses atributos não fossem os maiores e, portanto Ele não fosse superior em tudo, Ele continua sendo Deus.",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "Deus é SOBERANAMENTE JUSTO E BOM, percebemos nas menores e nas maiores coisas a sabedoria de Deus, o que não nos permite duvidar de sua justiça nem de sua bondade.",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        },
+        {
+            "question": "Deus é MODESTAMENTE JUSTO E BOM, percebemos nas menores e nas maiores coisas a sabedoria de Deus, o que não nos permite duvidar de sua justiça nem de sua bondade.",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "Deus é IMATERIAL, pois Ele não é formado pelo o que nós chamamos de matéria.",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        },
+        {
+            "question": "Deus não é MATERIAL, pois Ele não é formado pelo o que nós chamamos de matéria.",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        },
+        {
+            "question": "Deus não é IMATERIAL, pois Ele não é formado pelo o que nós chamamos de matéria.",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "Deus é MATERIAL, pois Ele é formado pelo o que nós chamamos de matéria.",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "Deus é IMUTÁVEL, pois Ele não está sujeito às mudanças aplicadas pelas leis que regem o universo.",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        },
+        {
+            "question": "Deus é MUTÁVEL, pois Ele não está sujeito às mudanças aplicadas pelas leis que regem o universo.",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "Deus é MUTÁVEL, pois Ele está sujeito às mudanças aplicadas pelas leis que regem o universo.",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "Contrário de MAU é BOM.",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        },
+        {
+            "question": "Contrário de MAU não é BOM.",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "Deus é ETERNO, pois não tem início e não tem fim, é infinito. Se tivesse início, é porque foi criado por um ser anterior, e portanto Ele não poderia ser Deus.",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        },
+        {
+            "question": "Deus é SEMI-ETERNO, pois tem início e não tem fim, é infinito.",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "Deus é TODO-PODEROSO, pois é único e se não tivesse um poder soberano, algo o teria e portanto Ele não poderia ser Deus.",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        },
+        {
+            "question": "Deus não é TODO-PODEROSO, pois não é único e não tendo um poder soberano, algo o teria mas Ele continua sendo Deus.",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "Deus é ÚNICO, pois não há outros Deuses, senão não haveria poder ou estabilidade no Universo.",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        },
+        {
+            "question": "Deus não é ÚNICO, pois há outros Deuses, senão não haveria estabilidade no Universo.",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        },
+        {
+            "question": "Olhando para dentro de nós mesmos, olhando para a Natureza e observando como ela caminha em total harmonia, conseguimos perceber que há uma inteligência muito maior do que a nossa, que é a responsável por tudo isto. Todas estas obras sejam as mais minúsculas células, passando pelos animais e pela natureza, e chegando até os homens, todas são criações perfeitas, exemplos do tamanho da sabedoria e da compaixão de Deus.",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        },
+        {
+            "question": "Olhando para dentro de nós mesmos, olhando para a Natureza e observando como ela caminha em total harmonia, não conseguimos perceber que há uma inteligência muito maior do que a nossa, que é a responsável por tudo isto. Todas estas obras sejam as mais minúsculas células, passando pelos animais e pela natureza, e chegando até os homens, todas não são criações perfeitas, exemplos do tamanho da sabedoria e da compaixão de Deus.",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "A palavra religião deriva do latim (religare, ligar, unir) e, segundo Léon Denis, no livro “Depois da Morte”, a religião deve ser o laço que liga o homem ao seu Criador. Para estabelecermos este laço, esta relação, uma ação nossa é muito importante, que é a prece.",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        },
+        {
+            "question": "A palavra religião deriva do latim (religare, ligar, unir) e, segundo Léon Denis, no livro “Depois da Morte”, a religião deve ser o laço que liga o homem ao seu Criador. Para estabelecermos este laço, esta relação, uma ação nossa é muito importante, que é a caridade.",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "A palavra religião deriva do latim (religare, desligar, desunir) e, segundo Léon Denis, no livro “Depois da Morte”, a religião deve ser o laço que liga o homem ao seu Criador. Para estabelecermos este laço, esta relação, uma ação nossa é muito importante, que é a prece.",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "A prece é a expressão de um sentimento que sempre alcança a Deus, quando ditada pelo coração de quem ora.",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        },
+        {
+            "question": "A prece é a expressão de um sentimento que nem sempre alcança a Deus, quando ditada pelo coração de quem ora.",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "A prece é a expressão de um sentimento que nem sempre alcança a Deus, quando não ditada pelo coração de quem ora.",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        },
+        {
+            "question": "A prece é uma “conversa” com Deus, onde se pode agradecer por tudo que somos e tudo o que temos, pedir ajuda ou proteção, não só para si mesmos, mas como para outras pessoas também.",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        },
+        {
+            "question": "A prece é uma “obrigação” com Deus, onde se pode agradecer por tudo que somos e tudo o que temos, pedir ajuda ou proteção, não só para si mesmos, mas como para outras pessoas também.",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "A prece é uma “conversa” com Deus, onde se pode agradecer por tudo que somos e tudo o que temos, pedir ajuda ou proteção, só para si mesmos.",
+            "answers":[
+                {"text":"Verdadeira","point":-1 },
+                {"text":"Falsa","point":1}
+            ]
+        },
+        {
+            "question": "A prece é uma “conversa” com Deus, onde se pode somente pedir ajuda, não só para si mesmos, mas como para outras pessoas também.",
+            "answers":[
+                {"text":"Verdadeira","point":1 },
+                {"text":"Falsa","point":-1}
+            ]
+        }
+      ],
+      "rule": [
+        "QuestionOnly1"
+      ]
+    },
+      "choice": {
+      "actions": [
+        
+      ],
+      "rule": [
+        "QuestionOnly1"
+      ]
+    },
+      "all_in_one": {
+          "actions": [
+      ],
+      "rule": [
+        "QuestionOnly1"
+      ]
+    }
+}
+
+  
+  

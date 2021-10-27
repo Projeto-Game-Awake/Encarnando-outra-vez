@@ -1,6 +1,5 @@
 var width = window.innerWidth * window.devicePixelRatio;
 var height = window.innerHeight * window.devicePixelRatio;
-var scene;
 
 var gameOptions = {
   tileWidthHalf: 25,
@@ -34,6 +33,7 @@ window.onload = function () {
 
 let url = new URL(window.location.href);
 const jogo = url.searchParams.get("jogo");
+let hasDeath = false;
 
 function clone(obj) {
   if (null == obj || "object" != typeof obj) return obj;
