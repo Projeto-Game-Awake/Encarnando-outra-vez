@@ -21,4 +21,12 @@ class QuestionOnly2Simple extends QuestionOnly1 {
       item);
     }
 
+    getMessage() {
+      return "NORMAL";
+    }
+
+    calculatePoint(point) {
+      return point;
+    }
+
 }

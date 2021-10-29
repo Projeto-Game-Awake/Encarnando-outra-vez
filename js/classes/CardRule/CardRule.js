@@ -3,107 +3,113 @@ class CardRule extends Phaser.GameObjects.Container {
       parent,
       x,
       y,
-      image,
+      image=null,
       backIndex,
       frontIndex,
       scale,
       eventName,
       item
     ) {
-      let frontImage = new Phaser.GameObjects.Sprite(
-        parent,
-        0,
-        0,
-        image,
-        frontIndex
-      );
-  
-      let backImage = new Phaser.GameObjects.Sprite(
-        parent,
-        x,
-        y,
-        image,
-        backIndex
-      );
-  
-      let style = {
-        fontSize: 10,
-        fontFamily: "Arial",
-        align: "left",
-        color: "#000000",
-        wordWrap: { width: 100, useAdvancedWrap: true },
-      };
-      
-      let question = parent.add.text(10, 30, item.question, style).setOrigin(0);
-      question.visible = false;
-
-      let startY = 100;
-
-      let answers = [];
-      item.answers = CardGame.suffle(item.answers);
-      for(let i=0;i<item.answers.length;i++) {
-        let answer = new Button(
+      if(image == null) {
+        super(parent, 0, 0);
+      } else {
+        let frontImage = new Phaser.GameObjects.Sprite(
           parent,
-          10,
-          startY,
-          (i+1) + " - " + item.answers[i].text,
-          function () {
-            const data = {
-              result: true,
-            };
-            eventManager.publish(eventName,item.answers[i]);
-            eventManager.publish("answer",item.answers[i]);
-          }
+          0,
+          0,
+          image,
+          frontIndex
         );
-        answer.visible = false;  
-        answers.push(answer);
-        startY += 20;
+    
+        let backImage = new Phaser.GameObjects.Sprite(
+          parent,
+          x,
+          y,
+          image,
+          backIndex
+        );
+    
+        let style = {
+          fontSize: 10,
+          fontFamily: "Arial",
+          align: "left",
+          color: "#000000",
+          wordWrap: { width: 100, useAdvancedWrap: true },
+        };
+        
+        let question = parent.add.text(10, 30, item.question, style).setOrigin(0);
+        question.visible = false;
+  
+        let startY = 100;
+  
+        let answers = [];
+        item.answers = CardGame.suffle(item.answers);
+        for(let i=0;i<item.answers.length;i++) {
+          let a = item.answers[i];
+          let answer = new Button(
+            parent,
+            10,
+            startY,
+            (i+1) + " - " + a.text,
+            () => {
+              const data = {
+                result: true,
+              };
+              a.point = this.calculatePoint(a.point,item.answers);
+              eventManager.publish(eventName);
+              eventManager.publish("answer",a);
+            }
+          );
+          answer.visible = false;  
+          answers.push(answer);
+          startY += 20;
+        }
+    
+        let elements = [
+          frontImage,
+          backImage,
+          question
+        ]
+        for(let i=0;i<answers.length;i++) {
+          elements.push(answers[i]);
+        }
+  
+        super(parent, x, y, elements);
+        
+        frontImage.setScale(scale, scale);
+    
+        frontImage.setOrigin(0, 0);
+        frontImage.alpha = 0.9;
+    
+        backImage.setScale(scale, scale);
+    
+        backImage.setOrigin(0, 0);
+        backImage.alpha = 0.9;
+        backImage.setInteractive();
+        backImage.on("pointerdown", this.showFace, this);
+    
+        this.frontImage = frontImage;
+        this.frontImage.visible = false;
+        this.backImage = backImage;
+        this.eventName = eventName;
+        this.question = question;
+        this.answers = answers;
+    
+        this.parent = parent;
+    
+        eventManager.subscribe("answer", (data) => {
+          this.destroy();
+        });
+    
+        let card = this;
+        eventManager.subscribe("card_turned", (data) => {
+           if (data != card) {
+             //card.setInteractive(false);
+           }
+        });
+    
+        parent.add.existing(this);
       }
-  
-      let elements = [
-        frontImage,
-        backImage,
-        question
-      ]
-      for(let i=0;i<answers.length;i++) {
-        elements.push(answers[i]);
-      }
-
-      super(parent, x, y, elements);
-      
-      frontImage.setScale(scale, scale);
-  
-      frontImage.setOrigin(0, 0);
-      frontImage.alpha = 0.9;
-  
-      backImage.setScale(scale, scale);
-  
-      backImage.setOrigin(0, 0);
-      backImage.alpha = 0.9;
-      backImage.setInteractive();
-      backImage.on("pointerdown", this.showFace, this);
-  
-      this.frontImage = frontImage;
-      this.frontImage.visible = false;
-      this.backImage = backImage;
-      this.eventName = eventName;
-      this.question = question;
-      this.answers = answers;
-  
-      this.parent = parent;
-  
-      eventManager.subscribe("answer", (data) => {
-        this.destroy();
-      });
-  
-      let card = this;
-      eventManager.subscribe("card_turned", (data) => {
-         if (data != card) {
-           //card.setInteractive(false);
-         }
-      });
-  
-      parent.add.existing(this);
     }
   
     showFace() {
@@ -153,7 +159,15 @@ class CardRule extends Phaser.GameObjects.Container {
       eventManager.publish("card_turned", this);
     }
   
+    getMessage() {
+      return null;
+    }
+
     turnCard() {}
   
+    hasAction() {
+      return true;
+    }
+
 }
   

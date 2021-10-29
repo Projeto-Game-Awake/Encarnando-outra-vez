@@ -21,4 +21,11 @@ class QuestionOnly2Nothing extends QuestionOnly1 {
       item);
     }
 
+    getMessage() {
+      return "TANTO FAZ";
+    }
+
+    calculatePoint(point,answers) {
+      return answers[Phaser.Math.Between(0,answers.length-1)].point;
+    }
 }

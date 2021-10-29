@@ -6,7 +6,7 @@ class Button extends Phaser.GameObjects.Text {
       align: "left",
       color: "#000000",
       backgroundColor: "#cccccc",
-      wordWrap: { width: 200, useAdvancedWrap: true },
+      wordWrap: { width: 400, useAdvancedWrap: true },
     };
     super(parent,x,y, label, style);
     this.setOrigin(0, 0);

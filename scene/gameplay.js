@@ -20,6 +20,10 @@ class gameplay extends Phaser.Scene {
       frameWidth: 240,
       frameHeight: 338,
     });
+    this.load.spritesheet("fundoCarta2", "static/sprites/fundoCarta2.png", {
+      frameWidth: 240,
+      frameHeight: 338,
+    });
     
     this.load.image("wheel", "static/images/wheel.png");
     this.load.image("pin", "static/images/pin.png");

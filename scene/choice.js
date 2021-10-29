@@ -7,6 +7,15 @@ class choice extends question {
     this.type = 2;
   }
   getItems(json) {   
-    return json.choice;
+    return this.getShared() || json.choice.actions;
+  }
+  getSpriteName() {
+    return "fundoCarta";
+  }
+  getSpriteFront() {
+    return 2;
+  }
+  getSpriteBack() {
+    return 3;
   }
 }

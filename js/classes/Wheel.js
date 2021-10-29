@@ -81,6 +81,7 @@ class Wheel {
                   const data = {
                     distance: this.slicePrizes[prize],
                   };
+
                   eventManager.publish("wheel_finished", data);
 
                   // player can spin again

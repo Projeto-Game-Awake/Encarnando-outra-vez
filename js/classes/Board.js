@@ -116,8 +116,7 @@ class Board extends Phaser.GameObjects.Container {
     return Phaser.Math.Between(0, 3);
   }
   getTileType(player) {
-    //return this.path[player.pos + 1].type;
-    return 0;
+    return this.path[player.pos + 1].type;
   }
   getCurrentPlayer() {
     return this.players[this.currentPlayerIndex];

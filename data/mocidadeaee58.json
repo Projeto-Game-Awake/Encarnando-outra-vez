@@ -1,0 +1,143 @@
+{
+    "shared":true,
+    "mini_game": {
+        "actions": [
+        ],
+        "rule": [
+            "QuestionOnly2Simple"
+        ]
+    },
+    "question": { 
+    "actions": [
+        {
+            "question": "O que você busca num relacionamento?",
+            "answers":[
+                {"text":"Prazer somente","point":-1 },
+                {"text":"Parceria","point":1},
+                {"text":"Afeto","point":1},
+                {"text":"Não busco relacionamento","point":-1}
+            ]
+        },
+        {
+            "question": "É possível viver sem o afeto das outras pessoas?",
+            "answers":[
+                {"text":"Sim, é o que eu faço","point":-1},
+                {"text":"Não, pois somos seres sociais","point":1},
+                {"text":"Sim, não precisamos dos outros","point":-1},
+                {"text":"Não, pois não vivemos sem alguém","point":-1}
+            ]
+        },
+        {
+            "question": "Existe idade certa pra começar a namorar?",
+            "answers":[
+                {"text":"Sim, depois dos 18","point":-1},
+                {"text":"Não, existe a responsabilidade necessária","point":1},
+                {"text":"Sim, depois dos 30","point":-1},
+                {"text":"Não, pois não é algo importante","point":-1}
+            ]
+        },
+        {
+            "question": "Você privilegia qual fase do relacionamento?",
+            "answers":[
+                {"text":"O começo","point":-1},
+                {"text":"O fim","point":-1},
+                {"text":"O momento atual","point":1},
+                {"text":"Sexo","point":-1}
+            ]
+        },
+        {
+            "question": "O que é preciso para se começar um relacionamento sério?",
+            "answers":[
+                {"text":"Dinheiro","point":-1},
+                {"text":"Responsabilidade","point":1},
+                {"text":"Afeto","point":1},
+                {"text":"Sexo agradável","point":-1}
+            ]
+        },
+        {
+            "question": "Após quantos encontros se considera que se está vivendo um relacionamento sério?",
+            "answers":[
+                {"text":"10, aproximadamente","point":-1},
+                {"text":"Não tem um número preciso","point":1},
+                {"text":"Não vivo relacionamentos sérios","point":-1},
+                {"text":"Nunca é o bastates","point":-1}
+            ]
+        },
+        {
+            "question": "Relacionamentos baseados só no prazer trazem quais consequências?",
+            "answers":[
+                {"text":"Mágoa","point":1},
+                {"text":"Nenhuma","point":-1},
+                {"text":"Doenças","point":1},
+                {"text":"Todos","point":-1}
+            ]
+        },
+        {
+            "question": "Como respeitar os sentimentos do parceiro?",
+            "answers":[
+                {"text":"Não constrariando o parceiro","point":-1},
+                {"text":"Tendo empatia","point":1},
+                {"text":"Isso não é importante","point":-1},
+                {"text":"Ouvindo o parceiro","point":1}
+            ]
+        },
+        {
+            "question": "Respeito os meus sentimentos quando me relaciono?",
+            "answers":[
+                {"text":"Não, pois a prioridade é o outro","point":-1},
+                {"text":"Sim, preciso estar bem para o outro ficar bem","point":1},
+                {"text":"Sim, sempre antes do outro","point":-1},
+                {"text":"Não, relacionamento são banais","point":-1}
+            ]
+        },
+        {
+            "question": "Muitas pessoas primeiro buscam o sexo antes de um relacionamento. O amor aparece como uma consequência. O que acha disso?",
+            "answers":[
+                {"text":"Normal","point":-1},
+                {"text":"Vulgarização do sexo","point":1},
+                {"text":"Essencial","point":-1},
+                {"text":"Vão todas para o Umbral Grosso","point":-1}
+            ]
+        },
+        {
+            "question": "Sexo antes do casamento é proibido?",
+            "answers":[
+                {"text":"Sim, pois é pecado.","point":-1},
+                {"text":"Não, mas não deve ser sem limites","point":1},
+                {"text":"Não, totalmente liberado","point":-1},
+                {"text":"Não, a menos que alguém saiba","point":-1}
+            ]
+        },
+        {
+            "question": "Relação sexual é sinônimo de amor?",
+            "answers":[
+                {"text":"Sim, são a mesma coisa","point":-1},
+                {"text":"Não, amor é um sentimento e sexo um ato físico","point":1},
+                {"text":"Quase igual, pouca diferença","point":-1},
+                {"text":"Não, são opostos","point":-1}
+            ]
+        }
+      ],
+      "rule": [
+        "QuestionOnly2Double"
+      ]
+    },
+      "choice": {
+      "actions": [
+        
+      ],
+      "rule": [
+        "QuestionOnly2Nothing"
+      ]
+    },
+      "all_in_one": {
+          "actions": [
+      ],
+      "rule": [
+        "QuestionOnly2Stop"
+      ]
+    }
+}
+
+  
+  

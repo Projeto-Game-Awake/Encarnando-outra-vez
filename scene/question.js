@@ -17,33 +17,50 @@ class question extends Phaser.Scene {
     this.isSelected = false;
 
     let json = this.cache.json.get("jogo");
-    this.items = this.getItems(json).actions;
+    this.items = this.getItems(json);
 
     this.cardGame = new CardGame(
       this,
       0,
       0,
       0.6,
-      "fundoCarta",
-      1,
-      0,
+      this.getSpriteName(),
+      this.getSpriteFront(),
+      this.getSpriteBack(),
       event,
       this.items,
       this.type
     );
 
+    eventManager.remove(event);
+
     eventManager.subscribe(event, (data) => {
-      const result = data.point;
-      this.selectCard(result);
+      this.selectCard();
     });
   }
   getItems(json) {
-    return json.question;
+    return this.getShared() || json.question.actions;
+  }
+  getShared() {
+    if(json.shared) {
+      return json.choice.actions.concat(json.mini_game.actions).concat(json.question.actions).concat(json.all_in_one.actions);
+    } else {
+      return null;
+    }
   }
   getName() {
-    return "question";
+    return this.constructor.name;
   }
-  selectCard(result) {
+  getSpriteName() {
+    return "fundoCarta";
+  }
+  getSpriteFront() {
+    return 0;
+  }
+  getSpriteBack() {
+    return 1;
+  }
+  selectCard() {
     this.scene.resume("main");
     this.cardGame.clear();
     this.scene.stop();

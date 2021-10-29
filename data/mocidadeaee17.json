@@ -1,9 +1,6 @@
 {
       "mini_game": {
         "actions": [
-        {
-          
-        }
       ],
       "rule": [
         "QuestionOnly1"

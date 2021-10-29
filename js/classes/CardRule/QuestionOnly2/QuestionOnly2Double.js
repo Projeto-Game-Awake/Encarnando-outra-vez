@@ -21,4 +21,12 @@ class QuestionOnly2Double extends QuestionOnly1 {
       item);
     }
 
+    getMessage() {
+      return "DUPLO";
+    }
+
+    calculatePoint(point) {
+      return point*2;
+    }
+    
 }

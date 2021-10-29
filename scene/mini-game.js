@@ -7,6 +7,15 @@ class mini_game extends question {
     this.type = 0;
   }
   getItems(json) {
-    return json.mini_game;
+    return this.getShared() || json.mini_game.actions;
+  }
+  getSpriteName() {
+    return "fundoCarta2";
+  }
+  getSpriteFront() {
+    return 0;
+  }
+  getSpriteBack() {
+    return 1;
   }
 }

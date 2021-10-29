@@ -16,4 +16,8 @@ class EventManager {
       subscriberCallback(data)
     );
   }
+
+  remove(event) {
+    delete this.subscribers[event]
+  }
 }

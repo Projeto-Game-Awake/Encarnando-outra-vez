@@ -21,4 +21,16 @@ class QuestionOnly2Stop extends QuestionOnly1 {
       item);
     }
 
+    getMessage() {
+      return "PARADA";
+    }
+
+    calculatePoint(point) {
+      return 0;
+    }
+
+    hasAction() {
+      return false;
+    }
+
 }
