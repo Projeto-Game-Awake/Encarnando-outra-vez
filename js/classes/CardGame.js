@@ -79,16 +79,17 @@ class CardGame extends Phaser.GameObjects.Container {
         callback: () => {
           text.destroy();
           if(instance.hasAction()) {
+            console.log("----TEM QUESTAO-----");
             this.showCards();
           } else {
             eventManager.publish("question_ended");
             eventManager.publish("answer",{point:0});
             this.destroy();
+            console.log("-----NAO EM QUESTAO----");
           }
         },
       });
       timeLine.play();
-    
     }
   }
   static suffle(items) {

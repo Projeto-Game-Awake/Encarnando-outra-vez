@@ -13,110 +13,152 @@ class Player extends Phaser.GameObjects.Container {
     this.index = index % 5;
     this.parent = parent;
     this.x = x;
-    this.y = y - gameOptions.tileHeightHalf * 2;
+    this.deltaY = gameOptions.tileHeightHalf;
+    this.y = y - this.deltaY;
     this.points = 0;
-    
+
     this.pos = -1;
 
-    sprite.setOrigin(0.5, 0.5);
+    sprite.setOrigin(0, 1);
     this.sprite = sprite;
     this.death = Phaser.Math.Between(20, 120);
     this.age = Phaser.Math.Between(0, 20);
 
-    eventManager.subscribe("player_walk", (data) => {});
+    this.changeState("idle");
+
+    this.behavior = {
+      moving: this.doMove,
+      stopped: this.hasStopped,
+    };
 
     parent.add.existing(this);
   }
 
   convertPosition(x, y) {
-    return coordinate.twoDToIso(x, y);
+    return coordinate.relativeToAbsolutePosition(x, y);
   }
 
-  gotoPosition(timeLine, x, y, callback) {
+  gotoPosition(x, y, callback) {
+    let timeLine = this.parent.tweens.createTimeline();
     timeLine.add({
       targets: this,
       x: x,
-      y: y,
+      y: y - this.deltaY,
+      scale: 1,
       duration: 300,
-      callback: function () {
+      onComplete: function () {
         if (callback) {
           callback();
         }
       },
     });
+
+    this.jumpAnimation.stop();
+
+    timeLine.play();
   }
   getInitialPosition() {
-    const zeroPos = {
-      x: coordinate.initX,
-      y: coordinate.initY,
-    };
-
-    const deltaY = this.convertPosition(0, 1);
-
     return {
-      x: zeroPos.x + deltaY.x,
-      y: zeroPos.y + deltaY.y,
+      x: 0,
+      y: 1,
     };
   }
 
-  doPath(distance) {
-    let path = this.parent.board.path;
+  update() {
+    const behaviorMethod = this.behavior[this.state];
+    if (behaviorMethod) {
+      console.log("Do =>");
+      behaviorMethod.call(this);
+    }
+  }
+
+  startMove(path) {
+    this.path = path;
+    this.changeState("moving");
+  }
+
+  changeState(state) {
+    console.log(`${this.state}=>${state}`);
+    this.state = state;
+  }
+
+  hasDeath() {
+    this.parent.scene.run("death", {
+      player: player,
+    });
+    eventManager.puslish("player_finished");
+    this.changeState("idle");
+  }
+
+  doMove() {
     let player = this;
 
-    let timeLine = this.parent.tweens.createTimeline();
+    if (this.path.length == 0) {
+      player.changeState("stopped");
+    } else {
+      let deltaPosition = this.path.shift().position;
+      player.pos++;
 
-    let current = 0;
+      let move = this.convertPosition(deltaPosition.x, deltaPosition.y);
 
-    let gotoX = this.x;
-    let gotoY = this.y;
+      this.changeState("moved");
+      this.age++;
 
-    if (this.pos == -1 && distance > 0) {
-      const initPosition = this.getInitialPosition();
-
-      gotoX = initPosition.x;
-      gotoY = initPosition.y;
-
-      this.gotoPosition(timeLine, gotoX, gotoY, function () {});
-      timeLine.play();
-    }
-
-    timeLine = this.parent.tweens.createTimeline();
-
-    while (current < distance) {
-      let direction = path[++this.pos].direction;
-      let deltaMove = this.parent.board.direction[direction];
-
-      let move = this.convertPosition(deltaMove.x, deltaMove.y);
-
-      gotoX += move.x;
-      gotoY += move.y;
-
-      this.gotoPosition(timeLine, gotoX, gotoY, function () {});
-      current++;
-    }
-
-    timeLine.add({
-      targets: player,
-      duration: 300,
-      callbackScope: this,
-      callback: () => {
-        this.parent.scene.pause();
-        if (hasDeath && player.death == player.age) {
-          this.parent.scene.run("death", {
-            player: player,
-          });
-        } else {
-          let sceneName = this.parent.tileScene[this.parent.board.getTileType(player)];
-          if(this.parent.scene.isSleeping(sceneName)) {
-            this.parent.scene.restart();
+      if (this.age > this.death) {
+        this.changeState("death");
+      } else {
+        console.log("GOTO=>", move);
+        this.gotoPosition(move.x, move.y, function () {
+          if (player.path.length > 0) {
+            player.changeState("moving");
           } else {
-            this.parent.scene.run(sceneName, {
-              player: player,
-            }); 
+            player.changeState("stopped");
           }
-        }
-      },
+        });
+      }
+    }
+  }
+
+  activate() {
+    this.jump();
+  }
+
+  desactivate() {
+    if (this.jumpAnimation) this.jumpAnimation.stop();
+  }
+
+  jump() {
+    this.jumpAnimation = this.parent.tweens.createTimeline();
+    this.jumpAnimation.add({
+      targets: this,
+      scale: 1.3,
+      y: this.y - 20,
+      duration: 300,
+      ease: "Power1",
+      yoyo: true,
+      loop: -1,
+      delay: 10,
     });
-    timeLine.play();
+
+    console.log("A");
+    this.jumpAnimation.play();
+  }
+
+  hasStopped() {
+    this.parent.scene.pause();
+    let player = this;
+
+    let sceneName =
+      this.parent.tileScene[this.parent.board.getTileType(player)];
+    if (this.parent.scene.isSleeping(sceneName)) {
+      this.parent.scene.restart();
+    } else {
+      this.parent.scene.run(sceneName, {
+        player: player,
+      });
+    }
+
+    eventManager.publish("player_finished");
+    this.changeState("idle");
   }
 }

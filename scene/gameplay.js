@@ -24,7 +24,7 @@ class gameplay extends Phaser.Scene {
       frameWidth: 240,
       frameHeight: 338,
     });
-    
+
     this.load.image("wheel", "static/images/wheel.png");
     this.load.image("pin", "static/images/pin.png");
 
@@ -50,12 +50,12 @@ class gameplay extends Phaser.Scene {
 
     this.well = new Wheel(this, 1000, 300);
 
-    this.endButton = this.add.text(20,20,"Encerrar", {
+    this.endButton = this.add.text(20, 20, "Encerrar", {
       fontSize: 60,
-      backgroundColor: "#00ff00"
+      backgroundColor: "#00ff00",
     });
     this.endButton.setInteractive();
-    this.endButton.on("pointerdown",this.showResult,this);
+    this.endButton.on("pointerdown", this.showResult, this);
 
     this.objects.camera = this.cameras.add(0, 0, width, height);
     this.objects.camera.setBackgroundColor("rgba(255, 255, 255, 0.5)");
@@ -66,29 +66,60 @@ class gameplay extends Phaser.Scene {
     this.board.start();
 
     let gameplay = this;
+    this.activePlayer = this.board.getCurrentPlayer();
+    this.activePlayer.activate();
+
+    function inactivate() {
+      for (let index = 0; index < gameplay.board.players.length; index++) {
+        const player = gameplay.board.players[index];
+        player.desactivate();
+      }
+    }
 
     eventManager.subscribe("wheel_finished", (data) => {
+      inactivate();
+      this.activePlayer = this.board.getCurrentPlayer();
+      this.activePlayer.activate();
+      this.playerMove = data;
       gameplay.doPlayerMove(data);
+    });
+
+    eventManager.subscribe("update_player", (data) => {
+      inactivate();
+      this.activePlayer = this.board.getCurrentPlayer();
+      this.activePlayer.activate();
+    });
+
+    eventManager.subscribe("player_finished", (data) => {
+      inactivate();
+      this.activePlayer = this.board.getCurrentPlayer();
+      this.activePlayer.activate();
     });
   }
   showResult() {
     this.endButton.alpha = 0;
-    this.scene.launch("result", {players:this.board.getPlayers()});
+    this.scene.launch("result", { players: this.board.getPlayers() });
   }
-  update(time, delta) {}
-  doPlayerMove(data) {
-    let value = data.distance;
-    let player = this.board.getCurrentPlayer();
-
-    if(hasDeath) {
-      player.age += value;
-      if (player.age > player.death) {
-        value -= player.age - player.death;
-        player.age = player.death;
-      }
+  update(time, delta) {
+    if (this.activePlayer) {
+      this.activePlayer.update();
     }
+  }
 
-    player.doPath(value);
+  doPlayerMove(data) {
+    let distance = data.distance;
+    let player = this.activePlayer;
+    let currentPosition = player.pos;
+
+    let endPos = Math.min(this.board.path.length, currentPosition + distance);
+    let startPos = Math.max(0, player.pos);
+    let playerPath = [];
+
+    for (let index = startPos; index <= endPos; index++) {
+      const element = this.board.path[index];
+      playerPath.push(element);
+    }
+    player.startMove(playerPath);
   }
   drawField() {
     this.poolArray = [];

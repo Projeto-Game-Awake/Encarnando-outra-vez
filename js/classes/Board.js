@@ -19,21 +19,20 @@ class Board extends Phaser.GameObjects.Container {
     this.blocks = {};
     this.initBlockTypes();
 
-    this.initX = 300 + (this.mapWidth / 2) * gameOptions.tileWidthHalf;
-    this.initY = 100;
-
     this.players = [];
     this.currentPlayerIndex = 0;
 
     const board = this;
     eventManager.subscribe("answer", (data) => {
       this.players[this.currentPlayerIndex].points += data.point;
-      if(data.point < 1) {
+      if (data.point < 1) {
         board.nextPlayer();
+        eventManager.publish("update_player");
       }
     });
 
     eventManager.subscribe("player_dead", (data) => {
+      eventManager.publish("update_player");
       board.nextPlayer();
     });
 
@@ -50,26 +49,18 @@ class Board extends Phaser.GameObjects.Container {
   }
 
   drawBoard() {
-    var tileWidthHalf = gameOptions.tileWidthHalf;
-
-    var initX = 300 + (this.mapWidth / 2) * tileWidthHalf;
-    var initY = 100;
-
     for (var y = 0; y < this.mapHeight; y++) {
       for (var x = 0; x < this.mapWidth; x++) {
-        let deltaPos = coordinate.twoDToIso(x, y);
-
-        var tx = deltaPos.x;
-        var ty = deltaPos.y;
-
         let block;
         let type = this.blocks[y][x];
-        block = new Block(this.parent, initX + tx, initY + ty, type);
+
+        let p = coordinate.relativeToAbsolutePosition(x, y);
+        block = new Block(this.parent, p.x, p.y, type);
 
         block.setData("row", x);
         block.setData("col", y);
 
-        block.setDepth(initY + ty);
+        block.setDepth(y);
 
         this.blocks[y][x] = type;
 
@@ -105,11 +96,22 @@ class Board extends Phaser.GameObjects.Container {
     if (this.path.length > 0) {
       this.path[this.path.length - 1].direction = direction;
     }
+
     for (let i = 0; i < count; i++) {
       this.x += current.x;
       this.y += current.y;
 
-      this.updatePlace(this.y, this.x, direction);
+      let type = this.generateType();
+      this.path.push({
+        type,
+        direction,
+        position: {
+          x: this.x,
+          y: this.y,
+        },
+      });
+
+      this.updatePlace(this.y, this.x, type);
     }
   }
   generateType() {
@@ -129,13 +131,7 @@ class Board extends Phaser.GameObjects.Container {
 
     this.currentPlayerIndex = this.currentPlayerIndex % gameOptions.players;
   }
-  updatePlace(y, x, direction) {
-    let type = this.generateType();
-    this.path.push({
-      type,
-      direction,
-    });
-
+  updatePlace(y, x, type) {
     this.blocks[y][x] = type;
   }
   start() {
